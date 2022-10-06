@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Clear DB</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="stylesheet" type="text/css" href="cc_alt.css"/>
+</head>
+<body>
+    <h1>Clear DB</h1>
+    <form action="clear_cc.php" method="post">
+        <table>
+            <tr>
+                <td>
+                    Are you sure? 
+                    <input type="radio" name="sure" value="yes"/>
+                    Yes
+                    <input type="radio" name="sure" value="no" checked="checked"/>
+                    No
+                </td>
+            </tr>
+        </table>
+        <input type="submit" value="Submit"/>
+    </form>
+    </br>
+    <a href="index.html"><button>Back to Main Page</button></a>
+</body>
+</html>
