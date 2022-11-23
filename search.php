@@ -378,14 +378,20 @@
                     else
                     {
                         if ($primeSequences)
-                            print(colorPrimes($row['chain']));
+                            print_color(colorPrimes($row['chain']), $color);
                         else
-                            print("<td>".$row['chain']."</td>");
+                            print_color($row['chain'], $color);
                     }
-                    if ($primeSequences)
-                        print_color(colorPrimes($row['loop']), $color);
-                    else
+
+                    if ($row['loop'][0] == "-")
                         print_color($row['loop'], $color);
+                    else
+                    {
+                        if ($primeSequences)
+                            print_color(colorPrimes($row['loop']), $color);
+                        else
+                            print_color($row['loop'], $color);
+                    }
                     print("<td>".$row['cl_ratio']."</td>");
                     print_color($row['stopping_time'], $color, True);
                     print_color($row['total_stopping_time'], $color, True);

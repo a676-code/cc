@@ -140,7 +140,7 @@ function getEval($x, $x0, $oddCoefficient, $oddAddend, $evenDivisor, $data = arr
             }
             else if (unbounded_unproven($x, $oddCoefficient, $oddAddend, $evenDivisor))
             {
-                $chain[] = $unboundedUnproven;
+                $chain[] = $unboundedUnproven; // -6
                 $loop[] = $unboundedUnproven;
                 $stoppingTime = $unboundedUnproven;
                 $totalStoppingTime = $unboundedUnproven;
@@ -840,7 +840,7 @@ function posInChain($x, $y)
 }
 
 // Need longer strings!
-// Fatal error: Uncaught TypeError: sqrt(): Argument #1 ($num) must be of type float, string given in C:\xampp\htdocs\cc\cc_functions.php:1089 Stack trace: #0 C:\xampp\htdocs\cc\cc_functions.php(1089): sqrt('817448,') #1 C:\xampp\htdocs\cc\cc_functions.php(41): prime('817448,') #2 C:\xampp\htdocs\cc\search.php(371): colorPrimes('31, 168, 84, 42...') #3 {main} thrown in C:\xampp\htdocs\cc\cc_functions.php on line 1089
+// Fatal error: Uncaught TypeError: sqrt(): Argument #1 ($num) must be of type float, string given in C:\xampp\htdocs\cc\cc_functions.php:849 Stack trace: #0 C:\xampp\htdocs\cc\cc_functions.php(849): sqrt('817448,') #1 C:\xampp\htdocs\cc\cc_functions.php(39): prime('817448,') #2 C:\xampp\htdocs\cc\search.php(381): colorPrimes('31, 168, 84, 42...') #3 {main} thrown in C:\xampp\htdocs\cc\cc_functions.php on line 849
 function prime($x)
 {
     if ($x == 1)
