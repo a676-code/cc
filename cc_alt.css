@@ -1,0 +1,8 @@
+body    {background:black; color:white}
+
+form    {
+    display: inline-block;
+    margin-left:10px; 
+    background: #424756;
+    border:1px solid black;
+}
