@@ -11,3 +11,6 @@ insert_cc_40-40-40_primes.sql
 insert_cc_50-50-50.sql
 test.mpl
 testPolynomials.cpp
+
+# polynomial class
+term.h
