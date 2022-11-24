@@ -1,14 +1,67 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Search DB</title>
+        <title>Search cc</title>
         <link rel="stylesheet" type="text/css" href="../cc.css"/>
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="stylesheet" type="text/css" href="cc_alt.css"/>
     </head>
     <body style="background:black; color:white">
+        <h1>Search cc</h1>
         <a href="search.html"><button>Make Another Search</button></a>
         <a href="index.html"><button>Back to Main Page</button></a>
         </br>
+        <p>
+            \(f:\mathbb{N} \to \mathbb{N}\) given by
+            \[
+                f(x) =
+                \begin{cases}
+                    ax + b & x \equiv 1 \pmod 2 \\
+                    x / c & x \equiv 0 \pmod 2
+                \end{cases}
+            \]
+        </p>
+        <p>
+            <u>\((a, b)\)</u>
+            </br>
+            \(
+                \left.
+                \begin{array}{l} 
+                    (e, o) \to o \to \boldsymbol\infty \\
+                    (o, e) \to
+                    \left\{
+                    \begin{array}{ll}
+                    o & x \equiv 1 \pmod 2 \to \boldsymbol\infty \\
+                    e & x \equiv 0 \pmod 2 \to \dots \to o \to \boldsymbol\infty
+                    \end{array}
+                    \right.
+                \end{array}
+                \right\}
+            \)
+            no loops
+        </p>
+        <p>
+            \(
+                \left.
+                \begin{array}{l}
+                    (e, e) \to e \to \dots \to o \to e \\
+                    (o, o) \to 
+                    \left\{
+                    \begin{array}{ll}
+                    e & x \equiv 1 \pmod 2 \to \dots \to o \to e \\
+                    o & x \equiv 0 \pmod 2 \to e \to \dots \to o
+                    \end{array}
+                    \right\} [cc]
+                \end{array}
+                \right\}
+            \)
+            loops
+        </p>
         <?php
+                include("cc_functions.php");
+                include("connection_cc.php");
+
                 $overflowColor = "red";
                 $proven['3'] = "yellow";
                 $proven['4'] = "darkorange";
@@ -17,38 +70,48 @@
                 $oddNegativeColor = "lawngreen";
                 $evenNegativeColor = "green";
                 $stabilizesColor = "aqua";
+                $colorStyle = $_POST['colorStyle'];
+
                 print("
                 <p>
                 <table>
                     <tr>
-                        <td><font color=\"".$overflowColor."\">Red</font></td>
+                        <td>");
+                        print_color("Red", -1, $colorStyle);
+                        print("</td>
                         <td>Overflow</td>
                     </tr>
                     <tr>
-                        <td>
-                            <font color=\"".$proven['3']."\">Yellow</font>/<font color=\"".$proven['4']."\">Orange</font>/<font color=\"".$proven['5']."\">Dark Orange</font>
-                        </td>
+                        <td>");
+                            print_color("Yellow", -3, $colorStyle);
+                            print("/");
+                            print_color("Orange", -4, $colorStyle);
+                            print("/");
+                            print_color("Dark Orange", -5, $colorStyle);
+                        print("</td>
                         <td>Proved Unbounded Sequence</td>
                     </tr>
                     <tr>
-                        <td><font color=\"".$unproven."\">Blue</font></td>
+                        <td>");
+                        print_color("Blue", -6, $colorStyle);print("</td>
                         <td>Unproved Unbounded Sequence</td>
                     </tr>
                     <tr>
-                        <td><font color=\"".$oddNegativeColor."\">Lawn Green</font></td>
+                        <td>");
+                        print_color("Lawn Green", -7, $colorStyle);
+                        print("</td>
                         <td>Odd, No Stop/Instability</td>
                     </tr>
                     <tr>
-                        <td><font color=\"".$evenNegativeColor."\">Green</font></td>
+                        <td>");
+                        print_color("Green", -8, $colorStyle);
+                        print("</td>
                         <td>Even, No Stop/Instability</td>
                     </tr>
                 </table>
                 </p>
                 ");
-                include("cc_functions.php");
-                include("connection_cc.php");
 
-                $color = $_POST['color'];
                 $provenUnbounded = $_POST['provenUnbounded'];
                 $unprovenUnbounded = $_POST['unprovenUnbounded'];
                 if ($_POST['primeSequences'] == "yes")
@@ -352,7 +415,7 @@
                 {
                     print("<tr>");
 
-                    if ($color == "text")
+                    if ($colorStyle == "text")
                     {
                         if ($row['stabilizes'] == 1)
                             print("<td style=\"color:".$stabilizesColor."\">");
@@ -374,27 +437,27 @@
                     .")</td>");
 
                     if ($row['chain'][0] == "-")
-                        print_color($row['chain'], $color);
+                        print_entry_color($row['chain'], $colorStyle);
                     else
                     {
                         if ($primeSequences)
-                            print_color(colorPrimes($row['chain']), $color);
+                            print_entry_color(colorPrimes($row['chain']), $colorStyle);
                         else
-                            print_color($row['chain'], $color);
+                            print_entry_color($row['chain'], $colorStyle);
                     }
 
                     if ($row['loop'][0] == "-")
-                        print_color($row['loop'], $color);
+                        print_entry_color($row['loop'], $colorStyle);
                     else
                     {
                         if ($primeSequences)
-                            print_color(colorPrimes($row['loop']), $color);
+                            print_entry_color(colorPrimes($row['loop']), $colorStyle);
                         else
-                            print_color($row['loop'], $color);
+                            print_entry_color($row['loop'], $colorStyle);
                     }
                     print("<td>".$row['cl_ratio']."</td>");
-                    print_color($row['stopping_time'], $color, True);
-                    print_color($row['total_stopping_time'], $color, True);
+                    print_entry_color($row['stopping_time'], $colorStyle, True);
+                    print_entry_color($row['total_stopping_time'], $colorStyle, True);
                     print("</tr>");
                 }
                 print("</table>");

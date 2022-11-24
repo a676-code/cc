@@ -881,7 +881,7 @@ function printv2d($v)
     print("\n");
 }
 
-function print_color($arrayElt, $color, $align = False)
+function print_color($text, $arrayElt, $colorStyle, $align = False)
 {
     $overflowColor = "red";
     $proven['3'] = "yellow";
@@ -903,7 +903,178 @@ function print_color($arrayElt, $color, $align = False)
         $oddNegative = $evenNegative - 1;
     }
     
-    if ($color == "text")
+    if ($colorStyle == "text")
+    {
+        if (
+            $arrayElt == "-1" || 
+            $arrayElt == "-2"
+            )
+        {
+            print("<font style=\"color:".$overflowColor."\"");
+            if ($align)
+                print(" align=\"right\"");
+            
+            print(">");
+        }
+        else if ($arrayElt == -3)
+        {
+            print("<font style=\"color:".$proven['3']."\"");
+            if ($align)
+                print(" align=\"right\"");
+            else
+                print("\"");
+            
+            print(">");
+        }
+        else if ($arrayElt == -4)
+        {
+            print("<font style=\"color:".$proven['4']."\"");
+            if ($align)
+                print(" align=\"right\"");
+            else
+                print("\"");
+            
+            print(">");
+        }
+        else if ($arrayElt == -5) // last unbounded_proven case
+        {
+            print("<font style=\"color:".$proven['5']."\"");
+            if ($align)
+                print(" align=\"right\"");
+            
+            print(">");
+        }
+        else if ($arrayElt == $unboundedUnproven)
+        {
+            print("<font style=\"color:".$unproven."\"");
+            if ($align)
+                print(" align=\"right\"");
+            
+            print(">");
+        }
+        else if ($arrayElt == $oddNegative)
+        {
+            print("<font style=\"color:".$oddNegativeColor."\"");
+            if ($align)
+                print(" align=\"right\"");
+            
+            print(">");
+        }
+        else if ($arrayElt == $evenNegative)
+        {
+            print("<font style=\"color:".$evenNegativeColor."\"");
+            if ($align)
+                print(" align=\"right\"");
+            
+            print(">");
+        }
+        else if ($arrayElt == 0)
+        {
+            print("<font style=\"color:".$stabilityColor);
+            if ($align)
+                print(" align=\"right\"");
+            
+            print(">");
+        }
+        else if ($align)
+            print("<font align=\"right\">");
+        else
+            print("<font>");
+    }
+    else
+    {
+        if (
+            $arrayElt == "-1" ||
+            $arrayElt == "-2"
+        )
+        {
+            print("<font style=\"background-color:".$overflowColor."; color:black\"");
+            if ($align)
+                print(" align=\"right\"");
+            print(">");
+        }
+        else if ($arrayElt == -3)
+        {
+            print("<font style=\"background-color:".$proven['3']."; color:black\"");
+            if ($align)
+                print(" align=\"right\"");
+            print(">");
+        }
+        else if ($arrayElt == -4)
+        {
+            print("<font style=\"background-color:".$proven['4']."; color:black\"");
+            if ($align)
+                print(" align=\"right\"");
+            print(">");
+        }
+        else if ($arrayElt == -5)
+        {
+            print("<font style=\"background-color:".$proven['5']."; color:black\"");
+            if ($align)
+                print(" align=\"right\"");
+            print(">");
+        }
+        else if ($arrayElt == $unboundedUnproven)
+        {
+            print("<font style=\"background-color:".$unproven."; color:black\"");
+            if ($align)
+                print(" align=\"right\"");
+            print(">");
+        }
+        else if ($arrayElt == $oddNegative)
+        {
+            print("<font style=\"background-color:".$oddNegativeColor."; color:black\"");
+            if ($align)
+                print(" align=\"right\"");
+            print(">");
+        }
+        else if ($arrayElt == $evenNegative)
+        {
+            print("<font style=\"background-color:".$evenNegativeColor."; color:black\"");
+            if ($align)
+                print(" align=\"right\"");
+            print(">");
+        }
+        else if ($arrayElt == 0)
+        {
+            print("<font style=\"background-color:".$stabilityColor."; color:black\"");
+            if ($align)
+                print(" align=\"right\"");
+            print(">");
+        }
+        else if ($align)
+            print("<font align=\"right\">");
+        else
+            print("<font>");
+    }
+    print($text);
+    print("</font>");
+}
+
+function print_entry_color($arrayElt, $colorStyle, $align = False)
+{
+
+    $overflowColor = "red";
+    $proven['3'] = "yellow";
+    $proven['4'] = "darkorange";
+    $proven['5'] = "#b36200";
+    $unproven = "blue";
+    $oddNegativeColor = "lawngreen";
+    $evenNegativeColor = "green";
+
+    $unboundedUnproven = -6;
+    if ($unboundedUnproven % 2 == 0)
+    {
+        $oddNegative = $unboundedUnproven - 1; // -5
+        $evenNegative = $oddNegative - 1; // -4
+    }
+    else
+    {
+        $evenNegative = $unboundedUnproven - 1;
+        $oddNegative = $evenNegative - 1;
+    }
+    
+    if ($colorStyle == "text")
     {
         if (
             $arrayElt == "-1" || 
@@ -1079,7 +1250,7 @@ function stabilizes($oddCoefficient, $oddAddend, $evenDivisor) : bool|int
     if (sizeof($loop1) > 1) // if (a, b, c)(1) not unbounded
     {
         $x = 2;
-        while (!$instabilityFound && $x < 2000)
+        while (!$instabilityFound && $x < 10000)
         {
             $curLoop = getLoop($x, $oddCoefficient, $oddAddend, $evenDivisor);
 
