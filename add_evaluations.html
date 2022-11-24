@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Add Evaluations</title>
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <link rel="stylesheet" type="text/css" href="cc_alt.css"/>
+    </head>
+    <body>
+        <h1>Add Evaluations</h1>
+        <p>
+            \(f:\mathbb{N} \to \mathbb{N}\) given by
+            \[
+                f(x) =
+                \begin{cases}
+                    ax + b & x \equiv 1 \pmod 2 \\
+                    x / c & x \equiv 0 \pmod 2
+                \end{cases}
+            \]
+        </p>
+        <p>
+            <u>\((a, b)\)</u>
+            </br>
+            \(
+                \left.
+                \begin{array}{l} 
+                    (e, o) \to o \to \boldsymbol\infty \\
+                    (o, e) \to
+                    \left\{
+                    \begin{array}{ll}
+                    o & x \equiv 1 \pmod 2 \to \boldsymbol\infty \\
+                    e & x \equiv 0 \pmod 2 \to \dots \to o \to \boldsymbol\infty
+                    \end{array}
+                    \right.
+                \end{array}
+                \right\}
+            \)
+            no loops
+        </p>
+        <p>
+            \(
+                \left.
+                \begin{array}{l}
+                    (e, e) \to e \to \dots \to o \to e \\
+                    (o, o) \to 
+                    \left\{
+                    \begin{array}{ll}
+                    e & x \equiv 1 \pmod 2 \to \dots \to o \to e \\
+                    o & x \equiv 0 \pmod 2 \to e \to \dots \to o
+                    \end{array}
+                    \right\} [cc]
+                \end{array}
+                \right\}
+            \)
+            loops
+        </p>
+        <form action="add_evaluations.php" method="post">
+            <table>
+                <tr>
+                    <td>
+                        \(a =\)
+                        <input type="text" name="a" size="2"/>
+                        ;
+                        <input type="text" name="aMin" size="2"/>
+                        \(\le a \le\)
+                        <input type="text" name="aMax" size="2"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        \(b =\)
+                        <input type="text" name="b" size="2"/>
+                        ; 
+                        <input type="text" name="bMin" size="2"/>
+                        \(\le b \le\)
+                        <input type="text" name="bMax" size="2"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        \(x =\)
+                        <input type="text" name="x" size="2"/>
+                        ;
+                        <input type="text" name="xMin" size="2"/>
+                        \(\le x \le\)
+                        <input type="text" name="xMax" size="2"`/>
+                    </td>
+                </tr>
+            </table>
+            <input type="submit" value="Submit"/>
+        </form>
+        </br>
+        <a href="index.html"><button>Back to Main Page</button></a>
+    </body>
+</html>
