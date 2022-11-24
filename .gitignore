@@ -1,16 +1,6 @@
 collatz.png
 ANEWFILE_created_twice.php
-notes.aux
-notes.fdb_latexmk
-notes.fls
-notes.loe
-notes.log
-notes.out
-notes.pdf
-notes.synctex.gz
-notes.tex
-notes.toc
-notes.txt
+/notes
 cc.mpl
 cc.cpp
 mymacros.php
