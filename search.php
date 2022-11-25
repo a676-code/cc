@@ -404,6 +404,12 @@
                 
                 print("<p>Rows Fetched: ".$result->num_rows."</p>");
 
+                print("
+                <p>
+                    CL-ratio\( = \\frac{\\text{chain length}}{\\text{loop length}}\)
+                </p>
+                ");
+
                 print("<table style=\"border:1px solid white\">");
                     print("<tr>");
                         print("<th>Evaluation</th>");
