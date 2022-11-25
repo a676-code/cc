@@ -587,7 +587,7 @@ function unbounded_proven_3($x, $oddCoefficient, $oddAddend, $evenDivisor)
 }
 
 // only inserts loops and unproven unbounded sequences, no proven unbounded sequences
-function insert($mysqli, $x, $oddCoefficient, $oddAddend, $evenDivisor, $unboundedUnproven = False, &$oneAdded = False)
+function insert($mysqli, $x, $oddCoefficient, $oddAddend, $evenDivisor, $unboundedUnproven = False, $stabilityMax = 1000, &$oneAdded = False)
 {
     if (!unbounded_proven($x, $oddCoefficient, $oddAddend, $evenDivisor))
     {
@@ -603,7 +603,7 @@ function insert($mysqli, $x, $oddCoefficient, $oddAddend, $evenDivisor, $unbound
 
         if (!$functionExists)
         {
-            if (stabilizes($oddCoefficient, $oddAddend, $evenDivisor) === True)
+            if (stabilizes($oddCoefficient, $oddAddend, $evenDivisor, $stabilityMax) === True)
                 $stabilizes = 1;
             else
                 $stabilizes = 0;
@@ -672,7 +672,7 @@ function insert($mysqli, $x, $oddCoefficient, $oddAddend, $evenDivisor, $unbound
 }
 
 // inserts everything
-function insert_all($mysqli, $x, $oddCoefficient, $oddAddend, $evenDivisor, $unboundedSequences, $unboundedUnproven = False, &$oneAdded = False)
+function insert_all($mysqli, $x, $oddCoefficient, $oddAddend, $evenDivisor, $unboundedSequences, $unboundedUnproven = False, $stabilityMax = 1000, &$oneAdded = False)
 {
     $checkFunctionExistsStmt = $mysqli->prepare("SELECT * FROM `function` f WHERE f.odd_coefficient = '".$oddCoefficient."' AND
     f.odd_addend = '".$oddAddend."' AND 
@@ -686,7 +686,7 @@ function insert_all($mysqli, $x, $oddCoefficient, $oddAddend, $evenDivisor, $unb
 
     if (!$functionExists)
     {
-        if (stabilizes($oddCoefficient, $oddAddend, $evenDivisor) === True)
+        if (stabilizes($oddCoefficient, $oddAddend, $evenDivisor, $stabilityMax) === True)
             $stabilizes = 1;
         else
             $stabilizes = 0;
@@ -1249,15 +1249,15 @@ function separatedPairExists($x, $s)
     return $found;
 }
 
-// is getLoop(x) = getLoop(1) for x = 1,...,2000
-function stabilizes($oddCoefficient, $oddAddend, $evenDivisor) : bool|int
+// is getLoop(x) = getLoop(1) for x = 1,...,max
+function stabilizes($oddCoefficient, $oddAddend, $evenDivisor, $stabilityMax) : bool|int
 {
     $instabilityFound = False;
     $loop1 = getLoop(1, $oddCoefficient, $oddAddend, $evenDivisor);
     if (sizeof($loop1) > 1) // if (a, b, c)(1) not unbounded
     {
         $x = 2;
-        while (!$instabilityFound && $x < 10000)
+        while (!$instabilityFound && $x < $stabilityMax)
         {
             $curLoop = getLoop($x, $oddCoefficient, $oddAddend, $evenDivisor);
 

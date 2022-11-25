@@ -73,7 +73,28 @@
         }
         print("\(x\) max must be a positive integer</br>");
     }
-    else
+
+    $stabilityMax = $_POST['stabilityMax'];
+    if (empty($stabilityMax) && $stabilityMax != 0)
+    {
+        if (!$errorPrinted)
+        {
+            print("<h1 style=\"color:red\">Error</h1>");
+            $errorPrinted = True;
+        }
+        print("stability max cannot be blank</br>");
+    }
+    else if ($stabilityMax <= 0)
+    {
+        if (!$errorPrinted)
+        {
+            print("<h1 style=\"color:red\">Error</h1>");
+            $errorPrinted = True;
+        }
+        print("stability max must be a positive integer</br>");
+    }
+    
+    if (!$errorPrinted)
     {
         if ($_POST['unboundedSequences'] == "yes")
             $unboundedSequences = True;
@@ -146,7 +167,7 @@
             for ($b = 1; $b <= $bMax; $b++)
             {
                 for ($x = 1; $x <= $xMax; $x++)
-                    insert_all($mysqli, $x, $a, $b, $evenDivisor, $unboundedSequences, $unboundedUnproven);
+                    insert_all($mysqli, $x, $a, $b, $evenDivisor, $unboundedSequences, $unboundedUnproven, $stabilityMax);
             }
         }
         $mysqli->close();
