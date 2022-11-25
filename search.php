@@ -112,8 +112,16 @@
                 </p>
                 ");
 
-                $provenUnbounded = $_POST['provenUnbounded'];
-                $unprovenUnbounded = $_POST['unprovenUnbounded'];
+                if ($_POST['provenUnbounded'] = "yes")
+                    $provenUnbounded = True;
+                else
+                    $provenUnbounded = False;
+                if ($_POST['unprovenUnbounded'] == "yes")
+                    $unprovenUnbounded = True;
+                else
+                    $unprovenUnbounded = False;
+                $unprovenUnboundedStyle = $_POST['unprovenUnboundedStyle'];
+
                 if ($_POST['primeSequences'] == "yes")
                     $primeSequences = True;
                 else
@@ -167,7 +175,7 @@
                 AND f.odd_addend = e.odd_addend
                 AND f.even_divisor = e.even_divisor";
                 
-                if (!empty($provenUnbounded) && $provenUnbounded == "no")
+                if (!$provenUnbounded)
                 {
                     if ($oddCoefficient == 6 && $oddAddend % 6 != 0 && $evenDivisor == 2)
                     {
@@ -234,17 +242,17 @@
                     }
                 }
 
-                // FIX: only fetches 76 rows of 1000 when unproven unbounded sequences not included? 
                 $unprovenUnboundedVal = -6;
-                if (!empty($unprovenUnbounded) && $unprovenUnbounded == "no")
+                if (!$unprovenUnbounded)
                 {
                     $query = $query." AND 
                         e.chain NOT LIKE '%".$unprovenUnboundedVal."' AND
                         e.loop NOT LIKE '%".$unprovenUnboundedVal."' AND
                         e.stopping_time != ".$unprovenUnboundedVal." AND 
-                        e.total_stopping_time != ".$unprovenUnboundedVal." AND 
-                        e.stabilization_time != ".$unprovenUnboundedVal;
+                        e.total_stopping_time != ".$unprovenUnboundedVal;
                 }
+
+                // FIXME: $unprovenUnboundedStyle
 
                 if ($primesOrComposites == "primes")
                     $query = $query." AND e.prime_chain NOT LIKE '%0%'

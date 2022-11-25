@@ -14,6 +14,11 @@
     $aMax = $_POST['aMax'];
     $bMax = $_POST['bMax'];
     $xMax = $_POST['xMax'];
+    if ($_POST['unboundedSequences'] == "yes")
+        $unboundedSequences = True;
+    else
+        $unboundedSequences = False;
+    
     if ($_POST['unboundedUnproven'] == "yes")
         $unboundedUnproven = True;
     else
@@ -80,7 +85,7 @@
         for ($b = 1; $b <= $bMax; $b++)
         {
             for ($x = 1; $x <= $xMax; $x++)
-                insert_no_check($mysqli, $x, $a, $b, $evenDivisor, $unboundedUnproven);
+                insert_all($mysqli, $x, $a, $b, $evenDivisor, $unboundedSequences, $unboundedUnproven);
         }
     }
     $mysqli->close();
