@@ -1,9 +1,9 @@
 <?php
-// ini_set('memory_limit', '1G');
-function consecutivePairExists($x)
+function consecutivePairExists($x,  $oddAddend, $oddCoefficient, $evenDivisor)
 {
     $found = False;
-    f($x);
+    $eval = getEval($x, $oddAddend, $oddCoefficient, $evenDivisor);
+    $chain = $eval['chain'];
 
     $i = 0;
     while (!$found && $i < sizeof($chain))
@@ -896,6 +896,7 @@ function print_color($text, $arrayElt, $colorStyle, $align = False)
     $unproven = "blue";
     $oddNegativeColor = "lawngreen";
     $evenNegativeColor = "green";
+    $stabilityColor = "aqua";
 
     $unboundedUnproven = -6;
     if ($unboundedUnproven % 2 == 0)
@@ -976,7 +977,7 @@ function print_color($text, $arrayElt, $colorStyle, $align = False)
         }
         else if ($arrayElt == 0)
         {
-            print("<font style=\"color:".$stabilityColor);
+            print("<font style=\"color:".$stabilityColor."\"");
             if ($align)
                 print(" align=\"right\"");
             

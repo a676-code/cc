@@ -69,7 +69,7 @@
                 $unproven = "blue";
                 $oddNegativeColor = "lawngreen";
                 $evenNegativeColor = "green";
-                $stabilizesColor = "aqua";
+                $stabilityColor = "aqua";
                 $colorStyle = $_POST['colorStyle'];
 
                 print("
@@ -107,6 +107,12 @@
                         print_color("Green", -8, $colorStyle);
                         print("</td>
                         <td>Even, No Stop/Instability</td>
+                    </tr>
+                    <tr>
+                        <td>");
+                        print_color("Aqua", 0, $colorStyle);
+                        print("</td>
+                        <td>Stable</td>
                     </tr>
                 </table>
                 </p>
@@ -432,14 +438,14 @@
                     if ($colorStyle == "text")
                     {
                         if ($row['stabilizes'] == 1)
-                            print("<td style=\"color:".$stabilizesColor."\">");
+                            print("<td style=\"color:".$stabilityColor."\">");
                         else
                             print("<td>");
                     }
                     else
                     {
                         if ($row['stabilizes'] == 1)
-                            print("<td style=\"background-color:".$stabilizesColor."; color:black\">");
+                            print("<td style=\"background-color:".$stabilityColor."; color:black\">");
                         else
                             print("<td>");
                     }
