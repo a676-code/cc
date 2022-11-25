@@ -1,10 +1,12 @@
-body    {background:black; color:white}
+body    {
+    background:black; color:white
+}
 
-/* table, th, tr, td   { border:1px solid white } */
+table, th, tr, td   { border:1px solid white }
 
-/* form    {
+form    {
     display: inline-block;
     margin-left:10px; 
-    background: #424756;
+    background:#424756;
     border:1px solid black;
-} */
+}

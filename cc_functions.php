@@ -1,26 +1,4 @@
 <?php
-function consecutivePairExists($x,  $oddAddend, $oddCoefficient, $evenDivisor)
-{
-    $found = False;
-    $eval = getEval($x, $oddAddend, $oddCoefficient, $evenDivisor);
-    $chain = $eval['chain'];
-
-    $i = 0;
-    while (!$found && $i < sizeof($chain))
-    {
-        if (
-            $chain[$i] > 2 && 
-            (array_search($chain[$i] - 1, $chain) !== False)
-            || 
-            (array_search($chain[$i] + 1, $chain) !== False)
-        )
-            $found = True;
-
-        $i++;
-    }
-    return $found;
-}
-
 function create_unbounded_unproven_no_check($mysqli, $x, $oddCoefficient, $oddAddend, $evenDivisor)
 {
     $eval = getEval($x, $x, $oddCoefficient, $oddAddend, $evenDivisor, $primeSequences);
@@ -51,22 +29,6 @@ function display($array)
     print("<pre>");
     print_r($array);
     print("</pre>");
-}
-
-// FIX: figure out and generalize
-function f_inv($x)
-{
-    $values;
-
-    if ($x % 6 == 0 || $x % 6 == 1 || $x % 6 == 2 || $x % 6 == 3 || $x % 6 == 5)
-        $values[] = 2 * $x;
-    
-    if ($x % 6 == 4)
-    {
-        $values[] = 2 * $x;
-        $values[] = ($x - 1) / 3;
-    }
-    return $values;
 }
 
 function getEval($x, $x0, $oddCoefficient, $oddAddend, $evenDivisor, $unboundedSequences, $data = array(), $chain = array(), $loop = array(), $call = 1, $stoppingTimeFound = False, $stoppingTime = -40, $unboundedUnproven = -6, $oddNegative = -7, $evenNegative = -8)
@@ -751,19 +713,6 @@ function insert_all($mysqli, $x, $oddCoefficient, $oddAddend, $evenDivisor, $unb
     }
 }
 
-function intersectOffMainChannel($x, $y, $oddCoefficient, $oddAddend, $evenDivisor)
-{
-    $xChain = $getChain($x, $oddCoefficient, $oddAddend, $evenDivisor);
-    $yChain = $getChain($y, $oddCoefficient, $oddAddend, $evenDivisor);;
-
-    for ($i = sizeof($xChain) - 1; $i !== False; $i--)
-    {
-        if (!powerOf2($xChain[$i]) && isInChain($xChain[$i], $yChain))
-            return True;
-    }
-    return False;
-}
-
 function intersectv($v1, $v2)
 {
     $newVec = array();
@@ -1229,26 +1178,6 @@ function print_entry_color($arrayElt, $colorStyle, $align = False)
     print("</td>");
 }
 
-function separatedPairExists($x, $s)
-{
-    $found = False;
-    f($x);
-    $i = 0;
-    while (!$found && $i < sizeof($chain))
-    {
-        if (
-            $chain[$i] > 2 && 
-            (array_search($chain[$i] - $s, $chain) !== False
-            || 
-            array_search($chain[$i] + $s, $chain) !== False)
-        )
-            $found = True;
-
-        $i++;
-    }
-    return $found;
-}
-
 // is getLoop(x) = getLoop(1) for x = 1,...,max
 function stabilizes($oddCoefficient, $oddAddend, $evenDivisor, $stabilityMax) : bool|int
 {
@@ -1664,5 +1593,77 @@ function write_unbounded_unproven($x, $oddCoefficient, $oddAddend, $evenDivisor)
                 fputs($handle, $lines[$i]);
         }
     }
+}
+
+// Miscellaneous unused functions ////////////////////////////////////
+function consecutivePairExists($x,  $oddAddend, $oddCoefficient, $evenDivisor)
+{
+    $found = False;
+    $eval = getEval($x, $oddAddend, $oddCoefficient, $evenDivisor);
+    $chain = $eval['chain'];
+
+    $i = 0;
+    while (!$found && $i < sizeof($chain))
+    {
+        if (
+            $chain[$i] > 2 && 
+            (array_search($chain[$i] - 1, $chain) !== False)
+            || 
+            (array_search($chain[$i] + 1, $chain) !== False)
+        )
+            $found = True;
+
+        $i++;
+    }
+    return $found;
+}
+
+// FIX: figure out and generalize
+function f_inv($x)
+{
+    $values;
+
+    if ($x % 6 == 0 || $x % 6 == 1 || $x % 6 == 2 || $x % 6 == 3 || $x % 6 == 5)
+        $values[] = 2 * $x;
+    
+    if ($x % 6 == 4)
+    {
+        $values[] = 2 * $x;
+        $values[] = ($x - 1) / 3;
+    }
+    return $values;
+}
+
+function separatedPairExists($x, $s)
+{
+    $found = False;
+    f($x);
+    $i = 0;
+    while (!$found && $i < sizeof($chain))
+    {
+        if (
+            $chain[$i] > 2 && 
+            (array_search($chain[$i] - $s, $chain) !== False
+            || 
+            array_search($chain[$i] + $s, $chain) !== False)
+        )
+            $found = True;
+
+        $i++;
+    }
+    return $found;
+}
+
+function intersectOffMainChannel($x, $y, $oddCoefficient, $oddAddend, $evenDivisor)
+{
+    $xChain = $getChain($x, $oddCoefficient, $oddAddend, $evenDivisor);
+    $yChain = $getChain($y, $oddCoefficient, $oddAddend, $evenDivisor);;
+
+    for ($i = sizeof($xChain) - 1; $i !== False; $i--)
+    {
+        if (!powerOf2($xChain[$i]) && isInChain($xChain[$i], $yChain))
+            return True;
+    }
+    return False;
 }
 ?>
