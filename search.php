@@ -420,6 +420,9 @@
                 <p>
                     Total Stopping Time = chain length - loop length)
                 </p>
+                <p>
+                    An evaluation of a function \(f\) of the form above is represented as \((a, b, c)(x)\)
+                </p>
                 ");
 
                 print("<table style=\"border:1px solid white\">");
