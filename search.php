@@ -263,8 +263,6 @@
                         e.total_stopping_time != ".$unprovenUnboundedVal;
                 }
 
-                // FIXME: $unprovenUnboundedStyle
-
                 if ($primesOrComposites == "primes")
                     $query = $query." AND e.prime_chain NOT LIKE '%0%'
                     AND e.chain NOT LIKE '-%'";
@@ -434,7 +432,7 @@
                         print("<th>Total Stopping Time</th>");
                     print("</tr>");
                 
-                // style=\"white-space: nowrap; overflow: hidden; text-overflow:ellipsis\"
+                // PRINTING TABLE CONTENTS /////////////////////////////
                 while ($row = $result->fetch_assoc())
                 {
                     print("<tr>");
@@ -460,21 +458,27 @@
                     $row['value']
                     .")</td>");
 
-                    if ($row['chain'][0] == "-")
-                        print_entry_color($row['chain'], $colorStyle);
-                    else
+                    // CHAIN ENTRY
+                    // Dynamic Unbounded Chains
+                    if ($row['loop'][0] == "-")
                     {
                         if ($colorPrimes)
-                            print_entry_color(colorPrimes($row['chain']), $colorStyle);
+                            print("<td>".colorPrimes($row['chain'])."</td>");
                         else
                         {
                             if ($primeSequences)
                                 print("<td>".$row['prime_chain']."</td>");
                             else
-                                print_entry_color($row['chain'], $colorStyle);
+                            {
+                                if ($unprovenUnboundedStyle == "code")
+                                    print_entry_color($row['loop'], $colorStyle);
+                                else
+                                    print_entry_color($row['chain'], $colorStyle);
+                            }
                         }
                     }
 
+                    // LOOP ENTRY
                     if ($row['loop'][0] == "-")
                         print_entry_color($row['loop'], $colorStyle);
                     else
@@ -489,6 +493,8 @@
                                 print_entry_color($row['loop'], $colorStyle);
                         }
                     }
+                    
+                    // OTHER ENTRIES
                     print("<td>".$row['cl_ratio']."</td>");
                     print_entry_color($row['stopping_time'], $colorStyle, True);
                     print_entry_color($row['total_stopping_time'], $colorStyle, True);

@@ -7,6 +7,7 @@ function create_unbounded_unproven_no_check($mysqli, $x, $oddCoefficient, $oddAd
         write_unbounded_unproven($x, $oddCoefficient, $oddAddend, $evenDivisor);
 }
 
+// returns a string with colored primes
 function colorPrimes($string)
 {
     $stringDebris = explode(", ", $string);
@@ -65,15 +66,15 @@ function getEval($x, $x0, $oddCoefficient, $oddAddend, $evenDivisor, $unboundedS
                 $stoppingTime = $value;
                 $totalStoppingTime = $value;
             }
-            else if (
-                !$unboundedSequences &&
-                unbounded_unproven($x, $oddCoefficient, $oddAddend, $evenDivisor))
-            {
-                $chain[] = $unboundedUnproven; // -6
-                $loop[] = $unboundedUnproven;
-                $stoppingTime = $unboundedUnproven;
-                $totalStoppingTime = $unboundedUnproven;
-            }
+            // else if (
+            //     !$unboundedSequences &&
+            //     unbounded_unproven($x, $oddCoefficient, $oddAddend, $evenDivisor))
+            // {
+            //     $chain[] = $unboundedUnproven; // -6
+            //     $loop[] = $unboundedUnproven;
+            //     $stoppingTime = $unboundedUnproven;
+            //     $totalStoppingTime = $unboundedUnproven;
+            // }
             else
             {
                 $chain[] = $x;
@@ -102,15 +103,15 @@ function getEval($x, $x0, $oddCoefficient, $oddAddend, $evenDivisor, $unboundedS
                 $stoppingTime = $value;
                 $totalStoppingTime = $value;
             }
-            else if (
-                !$unboundedSequences &&
-                unbounded_unproven($x, $oddCoefficient, $oddAddend, $evenDivisor))
-            {
-                $chain[] = $unboundedUnproven; // -6
-                $loop[] = $unboundedUnproven;
-                $stoppingTime = $unboundedUnproven;
-                $totalStoppingTime = $unboundedUnproven;
-            }
+            // else if (
+            //     !$unboundedSequences &&
+            //     unbounded_unproven($x, $oddCoefficient, $oddAddend, $evenDivisor))
+            // {
+            //     $chain[] = $unboundedUnproven; // -6
+            //     $loop[] = $unboundedUnproven;
+            //     $stoppingTime = $unboundedUnproven;
+            //     $totalStoppingTime = $unboundedUnproven;
+            // }
             else
             {
                 $chain[] = $x;
@@ -806,6 +807,7 @@ function printv2d($v)
     print("\n");
 }
 
+// printing any text with a color specified by arrayElt
 function print_color($text, $arrayElt, $colorStyle, $align = False)
 {
     $overflowColor = "red";
@@ -977,6 +979,8 @@ function print_color($text, $arrayElt, $colorStyle, $align = False)
     print("</font>");
 }
 
+/**/
+// printing any text with a color based on what arrayElt happens to be
 function print_entry_color($arrayElt, $colorStyle, $align = False)
 {
 
@@ -1147,6 +1151,7 @@ function print_entry_color($arrayElt, $colorStyle, $align = False)
     print($arrayElt);
     print("</td>");
 }
+/**/
 
 // is getLoop(x) = getLoop(1) for x = 1,...,max
 function stabilizes($oddCoefficient, $oddAddend, $evenDivisor, $stabilityMax) : bool|int
