@@ -419,6 +419,9 @@
                 <p>
                     CL-ratio \( = \\frac{\\text{chain length}}{\\text{loop length}}\)
                 </p>
+                <p>
+                    Total Stopping Time = chain length - loop length)
+                </p>
                 ");
 
                 print("<table style=\"border:1px solid white\">");
