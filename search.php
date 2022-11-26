@@ -132,6 +132,11 @@
                     $primeSequences = True;
                 else
                     $primeSequences = False;
+
+                if ($_POST['colorPrimes'] == "yes")
+                    $colorPrimes = True;
+                else
+                    $colorPrimes = False;
                 $primesOrComposites = $_POST['primesOrComposites'];
                 $oddCoefficient = $_POST['a'];
                 $aMin = $_POST['aMin'];
@@ -456,20 +461,30 @@
                         print_entry_color($row['chain'], $colorStyle);
                     else
                     {
-                        if ($primeSequences)
+                        if ($colorPrimes)
                             print_entry_color(colorPrimes($row['chain']), $colorStyle);
                         else
-                            print_entry_color($row['chain'], $colorStyle);
+                        {
+                            if ($primeSequences)
+                                print("<td>".$row['prime_chain']."</td>");
+                            else
+                                print_entry_color($row['chain'], $colorStyle);
+                        }
                     }
 
                     if ($row['loop'][0] == "-")
                         print_entry_color($row['loop'], $colorStyle);
                     else
                     {
-                        if ($primeSequences)
+                        if ($colorPrimes)
                             print_entry_color(colorPrimes($row['loop']), $colorStyle);
                         else
-                            print_entry_color($row['loop'], $colorStyle);
+                        {
+                            if ($primeSequences)
+                                print("<td>".$row['prime_loop']."</td>");
+                            else
+                                print_entry_color($row['loop'], $colorStyle);
+                        }
                     }
                     print("<td>".$row['cl_ratio']."</td>");
                     print_entry_color($row['stopping_time'], $colorStyle, True);

@@ -1,7 +1,7 @@
 <?php
 function create_unbounded_unproven_no_check($mysqli, $x, $oddCoefficient, $oddAddend, $evenDivisor)
 {
-    $eval = getEval($x, $x, $oddCoefficient, $oddAddend, $evenDivisor, $primeSequences);
+    $eval = getEval($x, $x, $oddCoefficient, $oddAddend, $evenDivisor);
     // if unbounded
     if ($eval['total_stopping_time'] < 0 && !unbounded_proven($x, $oddCoefficient, $oddAddend, $evenDivisor))
         write_unbounded_unproven($x, $oddCoefficient, $oddAddend, $evenDivisor);
@@ -604,7 +604,7 @@ function insert($mysqli, $x, $oddCoefficient, $oddAddend, $evenDivisor, $unbound
 }
 
 // inserts everything
-function insert_all($mysqli, $x, $oddCoefficient, $oddAddend, $evenDivisor, $primeSequences, $unboundedSequences, $unboundedUnproven = False, $stabilityMax = 1000, &$oneAdded = False)
+function insert_all($mysqli, $x, $oddCoefficient, $oddAddend, $evenDivisor, $unboundedSequences, $unboundedUnproven = False, $stabilityMax = 1000, &$oneAdded = False)
 {
     $checkFunctionExistsStmt = $mysqli->prepare("SELECT * FROM `function` f WHERE f.odd_coefficient = '".$oddCoefficient."' AND
     f.odd_addend = '".$oddAddend."' AND 
@@ -646,7 +646,7 @@ function insert_all($mysqli, $x, $oddCoefficient, $oddAddend, $evenDivisor, $pri
 
     if (!$evalExists)
     {
-        $eval = getEval($x, $x, $oddCoefficient, $oddAddend, $evenDivisor, $primeSequences, $unboundedSequences);
+        $eval = getEval($x, $x, $oddCoefficient, $oddAddend, $evenDivisor, $unboundedSequences);
         if ($eval['chain'][sizeof($eval['chain']) - 1] < 0)
             $chainLength = -1;
         else
@@ -666,20 +666,9 @@ function insert_all($mysqli, $x, $oddCoefficient, $oddAddend, $evenDivisor, $pri
             if ($eval['total_stopping_time'] < 0)
                 write_unbounded_unproven($x, $oddCoefficient, $oddAddend, $evenDivisor);
         }
-        
-        $chainArray = $eval['chain'];
-        if ($primeSequences)
-            $chainArray = getPrimeArray($chainArray);
-
-        $chain = implode(", ", $chainArray);
-        
+        $chain = implode(", ", $eval['chain']);
         $primeChain = implode(", ", $eval['prime_chain']);
-
-        $loopArray = $eval['loop'];
-        if ($primeSequences)
-            $loopArray = getPrimeArray($loopArray);
-
-        $loop = implode(", ", $chainArray);
+        $loop = implode(", ", $eval['loop']);
         $primeLoop = implode(", ", $eval['prime_loop']);
         $evalStmt = $mysqli->prepare("INSERT INTO cc.evaluation VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
         $evalStmt->bind_param("iiiississidii", $oddCoefficient, $oddAddend, $evenDivisor, $x, $chain, $primeChain, $chainLength, $loop, $primeLoop, $loopLength, $clRatio, $eval['stopping_time'], $eval['total_stopping_time']);
