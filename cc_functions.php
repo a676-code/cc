@@ -32,7 +32,7 @@ function display($array)
     print("</pre>");
 }
 
-function getEval($x, $x0, $oddCoefficient, $oddAddend, $evenDivisor, $unboundedSequences, $data = array(), $chain = array(), $loop = array(), $call = 1, $stoppingTimeFound = False, $stoppingTime = -40, $unboundedUnproven = -6, $oddNegative = -7, $evenNegative = -8)
+function getEval($x, $x0, $oddCoefficient, $oddAddend, $evenDivisor, $data = array(), $chain = array(), $loop = array(), $call = 1, $stoppingTimeFound = False, $stoppingTime = -40, $unboundedUnproven = -6, $oddNegative = -7, $evenNegative = -8)
 {
     if (!$stoppingTimeFound && $x < $x0)
     {
@@ -89,7 +89,7 @@ function getEval($x, $x0, $oddCoefficient, $oddAddend, $evenDivisor, $unboundedS
                 }
                 else
                 {
-                    return getEval($oddCoefficient * $x + $oddAddend, $x0, $oddCoefficient, $oddAddend, $evenDivisor, $unboundedSequences, $data, $chain, $loop, $call + 1, $stoppingTimeFound, $stoppingTime);
+                    return getEval($oddCoefficient * $x + $oddAddend, $x0, $oddCoefficient, $oddAddend, $evenDivisor, $data, $chain, $loop, $call + 1, $stoppingTimeFound, $stoppingTime);
                 }
             }
         }
@@ -125,7 +125,7 @@ function getEval($x, $x0, $oddCoefficient, $oddAddend, $evenDivisor, $unboundedS
                     $totalStoppingTime = $index + 1;
                 }
                 else
-                    return getEval($x / $evenDivisor, $x0, $oddCoefficient, $oddAddend, $evenDivisor, $unboundedSequences, $data, $chain, $loop, $call + 1, $stoppingTimeFound, $stoppingTime);
+                    return getEval($x / $evenDivisor, $x0, $oddCoefficient, $oddAddend, $evenDivisor, $data, $chain, $loop, $call + 1, $stoppingTimeFound, $stoppingTime);
             }
         }
     }
@@ -605,7 +605,7 @@ function insert($mysqli, $x, $oddCoefficient, $oddAddend, $evenDivisor, $unbound
 }
 
 // inserts everything
-function insert_all($mysqli, $x, $oddCoefficient, $oddAddend, $evenDivisor, $unboundedSequences, $unboundedUnproven = False, $stabilityMax = 1000, &$oneAdded = False)
+function insert_all($mysqli, $x, $oddCoefficient, $oddAddend, $evenDivisor, $unboundedUnproven = False, $stabilityMax = 1000, &$oneAdded = False)
 {
     $checkFunctionExistsStmt = $mysqli->prepare("SELECT * FROM `function` f WHERE f.odd_coefficient = '".$oddCoefficient."' AND
     f.odd_addend = '".$oddAddend."' AND 
@@ -647,7 +647,7 @@ function insert_all($mysqli, $x, $oddCoefficient, $oddAddend, $evenDivisor, $unb
 
     if (!$evalExists)
     {
-        $eval = getEval($x, $x, $oddCoefficient, $oddAddend, $evenDivisor, $unboundedSequences);
+        $eval = getEval($x, $x, $oddCoefficient, $oddAddend, $evenDivisor);
         if ($eval['chain'][sizeof($eval['chain']) - 1] < 0)
             $chainLength = -1;
         else

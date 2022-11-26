@@ -95,12 +95,7 @@
     }
     
     if (!$errorPrinted)
-    {
-        if ($_POST['unboundedSequences'] == "yes")
-            $unboundedSequences = True;
-        else
-            $unboundedSequences = False;
-        
+    {        
         if ($_POST['unboundedUnproven'] == "yes")
             $unboundedUnproven = True;
         else
@@ -167,7 +162,7 @@
             for ($b = 1; $b <= $bMax; $b++)
             {
                 for ($x = 1; $x <= $xMax; $x++)
-                    insert_all($mysqli, $x, $a, $b, $evenDivisor, $unboundedSequences, $unboundedUnproven, $stabilityMax);
+                    insert_all($mysqli, $x, $a, $b, $evenDivisor, $unboundedUnproven, $stabilityMax);
             }
         }
         $mysqli->close();
