@@ -459,22 +459,16 @@
                     .")</td>");
 
                     // CHAIN ENTRY
-                    // Dynamic Unbounded Chains
-                    if ($row['loop'][0] == "-")
+                    if ($row['loop'][0] == "-" && $unprovenUnboundedStyle == "code")
+                        print_entry_color($row['loop'], $colorStyle);
+                    else // regular chain or unbounded sequence
                     {
                         if ($colorPrimes)
-                            print("<td>".colorPrimes($row['chain'])."</td>");
+                        print("<td>".colorPrimes($row['chain'])."</td>");
                         else
                         {
                             if ($primeSequences)
                                 print("<td>".$row['prime_chain']."</td>");
-                            else
-                            {
-                                if ($unprovenUnboundedStyle == "code")
-                                    print_entry_color($row['loop'], $colorStyle);
-                                else
-                                    print_entry_color($row['chain'], $colorStyle);
-                            }
                         }
                     }
 
