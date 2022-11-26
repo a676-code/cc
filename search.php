@@ -418,7 +418,7 @@
                     CL-ratio \( = \\frac{\\text{chain length}}{\\text{loop length}}\)
                 </p>
                 <p>
-                    Total Stopping Time = chain length - loop length)
+                    Total Stopping Time = chain length - loop length
                 </p>
                 <p>
                     An evaluation of a function \(f\) of the form above is represented as \((a, b, c)(x)\)
