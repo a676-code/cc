@@ -420,11 +420,7 @@
                     print("<tr>");
                         print("<th>Evaluation</th>");
                         print("<th>Chain</th>");
-                        // if ($primeSequences)
-                        //     print("<th>Prime Chain</th>");
                         print("<th>Loop</th>");
-                        // if ($primeSequences)
-                        //     print("<th>Prime Loop</th>");
                         print("<th>CL-ratio</th>");
                         print("<th>Stopping Time</th>");
                         print("<th>Total Stopping Time</th>");

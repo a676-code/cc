@@ -207,36 +207,6 @@ function getFileArray($fileName)
     return $fileArray;
 }
 
-function getLayer($n)
-{
-    $layers = getLayers($n);
-    return $layers[$n];
-}
-
-function getLayers($n)
-{
-    $start[] = 1;
-    $two[] = 2;
-    $layers[] = $start;
-    $layers[] = $two;
-
-    for ($i = 1; $i < $n; $i++)
-    {
-        $layers[] = $newVec;
-        for ($j = 0; $j < sizeof($layers[$i]); $j++)
-        {
-            $toBeInserted = f_inv($layers[$i][j]);
-            $layers[$i + 1].$insert
-            (
-                $layers[$i + 1].end(), 
-                $toBeInserted.begin(), 
-                $toBeInserted.end()
-            );
-        }
-    }
-    return $layers;
-}
-
 // FIX: inconsistent loop output for sequences that go to infinity (?)
 function getLoop($x, $oddCoefficient, $oddAddend, $evenDivisor, $chain = array(), $loop = array(), $call = 1)
 {
@@ -634,7 +604,7 @@ function insert($mysqli, $x, $oddCoefficient, $oddAddend, $evenDivisor, $unbound
 }
 
 // inserts everything
-function insert_all($mysqli, $x, $oddCoefficient, $oddAddend, $evenDivisor, $unboundedSequences, $unboundedUnproven = False, $stabilityMax = 1000, &$oneAdded = False)
+function insert_all($mysqli, $x, $oddCoefficient, $oddAddend, $evenDivisor, $primeSequences, $unboundedSequences, $unboundedUnproven = False, $stabilityMax = 1000, &$oneAdded = False)
 {
     $checkFunctionExistsStmt = $mysqli->prepare("SELECT * FROM `function` f WHERE f.odd_coefficient = '".$oddCoefficient."' AND
     f.odd_addend = '".$oddAddend."' AND 
@@ -676,7 +646,7 @@ function insert_all($mysqli, $x, $oddCoefficient, $oddAddend, $evenDivisor, $unb
 
     if (!$evalExists)
     {
-        $eval = getEval($x, $x, $oddCoefficient, $oddAddend, $evenDivisor, $unboundedSequences);
+        $eval = getEval($x, $x, $oddCoefficient, $oddAddend, $evenDivisor, $primeSequences, $unboundedSequences);
         if ($eval['chain'][sizeof($eval['chain']) - 1] < 0)
             $chainLength = -1;
         else
@@ -696,9 +666,20 @@ function insert_all($mysqli, $x, $oddCoefficient, $oddAddend, $evenDivisor, $unb
             if ($eval['total_stopping_time'] < 0)
                 write_unbounded_unproven($x, $oddCoefficient, $oddAddend, $evenDivisor);
         }
-        $chain = implode(", ", $eval['chain']);
+        
+        $chainArray = $eval['chain'];
+        if ($primeSequences)
+            $chainArray = getPrimeArray($chainArray);
+
+        $chain = implode(", ", $chainArray);
+        
         $primeChain = implode(", ", $eval['prime_chain']);
-        $loop = implode(", ", $eval['loop']);
+
+        $loopArray = $eval['loop'];
+        if ($primeSequences)
+            $loopArray = getPrimeArray($loopArray);
+
+        $loop = implode(", ", $chainArray);
         $primeLoop = implode(", ", $eval['prime_loop']);
         $evalStmt = $mysqli->prepare("INSERT INTO cc.evaluation VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
         $evalStmt->bind_param("iiiississidii", $oddCoefficient, $oddAddend, $evenDivisor, $x, $chain, $primeChain, $chainLength, $loop, $primeLoop, $loopLength, $clRatio, $eval['stopping_time'], $eval['total_stopping_time']);
@@ -1633,6 +1614,51 @@ function f_inv($x)
     return $values;
 }
 
+function getLayer($n)
+{
+    $layers = getLayers($n);
+    return $layers[$n];
+}
+
+function getLayers($n)
+{
+    $start[] = 1;
+    $two[] = 2;
+    $layers[] = $start;
+    $layers[] = $two;
+
+    for ($i = 1; $i < $n; $i++)
+    {
+        $layers[] = $newVec;
+        for ($j = 0; $j < sizeof($layers[$i]); $j++)
+        {
+            $toBeInserted = f_inv($layers[$i][j]);
+            $layers[$i + 1].$insert
+            (
+                $layers[$i + 1].end(), 
+                $toBeInserted.begin(), 
+                $toBeInserted.end()
+            );
+        }
+    }
+    return $layers;
+}
+
+function intersectOffMainChannel($x, $y, $oddCoefficient, $oddAddend, $evenDivisor)
+{
+    $xEval = $getEval($x, $oddCoefficient, $oddAddend, $evenDivisor);
+    $yEval = $getEval($y, $oddCoefficient, $oddAddend, $evenDivisor);
+    $xChain = $xEval['chain'];
+    $yChain = $yEval['chain'];
+
+    for ($i = sizeof($xChain) - 1; $i !== False; $i--)
+    {
+        if (!powerOf2($xChain[$i]) && isInChain($xChain[$i], $yChain))
+            return True;
+    }
+    return False;
+}
+
 function separatedPairExists($x, $s)
 {
     $found = False;
@@ -1653,20 +1679,5 @@ function separatedPairExists($x, $s)
         $i++;
     }
     return $found;
-}
-
-function intersectOffMainChannel($x, $y, $oddCoefficient, $oddAddend, $evenDivisor)
-{
-    $xEval = $getEval($x, $oddCoefficient, $oddAddend, $evenDivisor);
-    $yEval = $getEval($y, $oddCoefficient, $oddAddend, $evenDivisor);
-    $xChain = $xEval['chain'];
-    $yChain = $yEval['chain'];
-
-    for ($i = sizeof($xChain) - 1; $i !== False; $i--)
-    {
-        if (!powerOf2($xChain[$i]) && isInChain($xChain[$i], $yChain))
-            return True;
-    }
-    return False;
 }
 ?>
