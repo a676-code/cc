@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create DB</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="stylesheet" type="text/css" href="cc_alt.css"/>
+</head>
+<body>
+    <h1>Create DB</h1>
+    <p>
+        \(f:\mathbb{N} \to \mathbb{N}\) given by
+        \[
+            f(x) =
+            \begin{cases}
+                ax + b & x \equiv 1 \pmod 2 \\
+                x / c & x \equiv 0 \pmod 2
+            \end{cases}
+        \]
+    </p>
+    <p>
+        <u>\((a, b)\)</u>
+        </br>
+        \(
+            \left.
+            \begin{array}{l} 
+                (e, o) \to o \to \boldsymbol\infty \\
+                (o, e) \to
+                \left\{
+                \begin{array}{ll}
+                o & x \equiv 1 \pmod 2 \to \boldsymbol\infty \\
+                e & x \equiv 0 \pmod 2 \to \dots \to o \to \boldsymbol\infty
+                \end{array}
+                \right.
+            \end{array}
+            \right\}
+        \)
+        no loops
+    </p>
+    <p>
+        \(
+            \left.
+            \begin{array}{l}
+                (e, e) \to e \to \dots \to o \to e \\
+                (o, o) \to 
+                \left\{
+                \begin{array}{ll}
+                e & x \equiv 1 \pmod 2 \to \dots \to o \to e \\
+                o & x \equiv 0 \pmod 2 \to e \to \dots \to o
+                \end{array}
+                \right\} [cc]
+            \end{array}
+            \right\}
+        \)
+        loops
+    </p>
+    <form action="create_cc.php" method="post" style="width:65%">
+        <p style="width:50%">
+            The time limit is 10 minutes, so estimate how many evaluations and stability checks will fit into that time-frame. 
+        </p>
+        <table>
+            <tr>
+                <td>\(a\) max \(=\)
+                    <input type="text" name="aMax" size="2"/>
+                </td>
+            </tr>
+            <tr>
+                <td>\(b\) max \(=\)
+                    <input type="text" name="bMax" size="2"/>
+                </td>
+            </tr>
+            <tr>
+                <td>\(x\) max \(=\)
+                    <input type="text" name="xMax" size="2"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Check if each \(f\) stabilizes up to \(x = \)
+                    <input type="text" name="stabilityMax" size="2" value="1000"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Insert unbounded sequences? 
+                    <input type="radio" name="unboundedSequences" value="yes"\> Yes
+                    <input type="radio" name="unboundedSequences" value="no" checked="checked"\> No
+                    (saves lots of time if No)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Write <tt>unbounded_unproven</tt>? 
+                    <input type="radio" name="unboundedUnproven" value="yes"/>
+                    Yes
+                    <input type="radio" name="unboundedUnproven" value="no" checked="checked"/>
+                    No (Always do No.)
+                </td>
+            </tr>
+        </table>
+        <input type="submit" value="Submit"/>
+        <input type="reset" value="Clear"/>
+    </form>
+    </br>
+    <a href="index.html"><button>Back to Main Page</button></a>
+</body>
+</html>
