@@ -8,6 +8,52 @@
 </head>
 <body>
     <h1>Create DB</h1>
+    <p>
+        \(f:\mathbb{N} \to \mathbb{N}\) given by
+        \[
+            f(x) =
+            \begin{cases}
+                ax + b & x \equiv 1 \pmod 2 \\
+                x / c & x \equiv 0 \pmod 2
+            \end{cases}
+        \]
+    </p>
+    <p>
+        <u>\((a, b)\)</u>
+        </br>
+        \(
+            \left.
+            \begin{array}{l} 
+                (e, o) \to o \to \boldsymbol\infty \\
+                (o, e) \to
+                \left\{
+                \begin{array}{ll}
+                o & x \equiv 1 \pmod 2 \to \boldsymbol\infty \\
+                e & x \equiv 0 \pmod 2 \to \dots \to o \to \boldsymbol\infty
+                \end{array}
+                \right.
+            \end{array}
+            \right\}
+        \)
+        no loops
+    </p>
+    <p>
+        \(
+            \left.
+            \begin{array}{l}
+                (e, e) \to e \to \dots \to o \to e \\
+                (o, o) \to 
+                \left\{
+                \begin{array}{ll}
+                e & x \equiv 1 \pmod 2 \to \dots \to o \to e \\
+                o & x \equiv 0 \pmod 2 \to e \to \dots \to o
+                \end{array}
+                \right\} [cc]
+            \end{array}
+            \right\}
+        \)
+        loops
+    </p>
     <form action="create_cc.php" method="post">
         <table>
             <tr>
