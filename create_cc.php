@@ -9,7 +9,7 @@
 <body>
     <?php
     $time_start = microtime(true);
-    set_time_limit(86400);
+    set_time_limit(600);
     // ini_set('memory_limit', '2048M');
     include("cc_functions.php");
     include("connection_blank.php");
@@ -95,7 +95,12 @@
     }
     
     if (!$errorPrinted)
-    {        
+    {
+        if ($_POST['unboundedSequences'] == "yes")
+            $unboundedSequences = True;
+        else
+            $unboundedSequences = False;
+        
         if ($_POST['unboundedUnproven'] == "yes")
             $unboundedUnproven = True;
         else
@@ -162,7 +167,7 @@
             for ($b = 1; $b <= $bMax; $b++)
             {
                 for ($x = 1; $x <= $xMax; $x++)
-                    insert_all($mysqli, $x, $a, $b, $evenDivisor, $unboundedUnproven, $stabilityMax);
+                    insert_all($mysqli, $x, $a, $b, $evenDivisor, $unboundedSequences, $unboundedUnproven, $stabilityMax);
             }
         }
         $mysqli->close();

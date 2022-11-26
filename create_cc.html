@@ -54,7 +54,10 @@
         \)
         loops
     </p>
-    <form action="create_cc.php" method="post">
+    <form action="create_cc.php" method="post" style="width:65%">
+        <p style="width:50%">
+            The time limit is 10 minutes, so estimate how many evaluations and stability checks will fit into that time-frame. 
+        </p>
         <table>
             <tr>
                 <td>\(a\) max \(=\)
@@ -73,8 +76,16 @@
             </tr>
             <tr>
                 <td>
-                    Check if stabilizes up to \(x = \)
+                    Check if each \(f\) stabilizes up to \(x = \)
                     <input type="text" name="stabilityMax" size="2" value="1000"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Insert unbounded sequences? 
+                    <input type="radio" name="unboundedSequences" value="yes"\> Yes
+                    <input type="radio" name="unboundedSequences" value="no" checked="checked"\> No
+                    (saves lots of time if No)
                 </td>
             </tr>
             <tr>
@@ -83,7 +94,7 @@
                     <input type="radio" name="unboundedUnproven" value="yes"/>
                     Yes
                     <input type="radio" name="unboundedUnproven" value="no" checked="checked"/>
-                    No
+                    No (Always do No.)
                 </td>
             </tr>
         </table>
