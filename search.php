@@ -412,7 +412,7 @@
 
                 print("
                 <p>
-                    CL-ratio\( = \\frac{\\text{chain length}}{\\text{loop length}}\)
+                    CL-ratio \( = \\frac{\\text{chain length}}{\\text{loop length}}\)
                 </p>
                 ");
 

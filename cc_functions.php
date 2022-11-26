@@ -1618,10 +1618,9 @@ function consecutivePairExists($x,  $oddAddend, $oddCoefficient, $evenDivisor)
     return $found;
 }
 
-// FIX: figure out and generalize
 function f_inv($x)
 {
-    $values;
+    $values = array();
 
     if ($x % 6 == 0 || $x % 6 == 1 || $x % 6 == 2 || $x % 6 == 3 || $x % 6 == 5)
         $values[] = 2 * $x;
@@ -1637,7 +1636,9 @@ function f_inv($x)
 function separatedPairExists($x, $s)
 {
     $found = False;
-    f($x);
+    $eval = $getEval($x, $oddCoefficient, $oddAddend, $evenDivisor);
+    $chain = $eval['chain']; 
+
     $i = 0;
     while (!$found && $i < sizeof($chain))
     {
@@ -1656,8 +1657,10 @@ function separatedPairExists($x, $s)
 
 function intersectOffMainChannel($x, $y, $oddCoefficient, $oddAddend, $evenDivisor)
 {
-    $xChain = $getChain($x, $oddCoefficient, $oddAddend, $evenDivisor);
-    $yChain = $getChain($y, $oddCoefficient, $oddAddend, $evenDivisor);;
+    $xEval = $getEval($x, $oddCoefficient, $oddAddend, $evenDivisor);
+    $yEval = $getEval($y, $oddCoefficient, $oddAddend, $evenDivisor);
+    $xChain = $xEval['chain'];
+    $yChain = $yEval['chain'];
 
     for ($i = sizeof($xChain) - 1; $i !== False; $i--)
     {
