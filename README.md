@@ -1,0 +1,2 @@
+# What is `cc`? 
+`cc` is an application for generalizing the [Collatz conjecture](https://en.wikipedia.org/wiki/Collatz_conjecture) (see also [here](https://www.youtube.com/watch?v=5mFpVDpKX70) and [here](https://www.youtube.com/watch?v=LqKpkdRRLZw)) for polynomials of degree 1. 
