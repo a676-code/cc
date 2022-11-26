@@ -117,8 +117,7 @@ if ($inputValid)
         {
             for ($x = $xMin; $x <= $xMax; $x++)
             {
-                // if (!unbounded_proven($x, $a, $b, $evenDivisor))
-                    insert_all($mysqli, $x, $a, $b, 2, False);
+                insert_all($mysqli, $x, $a, $b, $evenDivisor, $unboundedSequences, $unboundedUnproven, $stabilityMax);
                 // else if ($oneNotAdded == False)
                 //     $oneNotAdded = True;
             }

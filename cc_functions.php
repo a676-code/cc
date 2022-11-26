@@ -1188,7 +1188,7 @@ function stabilizes($oddCoefficient, $oddAddend, $evenDivisor, $stabilityMax) : 
 }
 
 // FIX: unbounded_unproven_50-50-50.php is too long!
-include("C:/xampp/htdocs/cc/unbounded_unproven_50.php");
+include("unbounded_unproven_50.php");
 
 function dump_cc()
 {
