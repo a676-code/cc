@@ -429,8 +429,6 @@
                         print("<th>Stopping Time</th>");
                         print("<th>Total Stopping Time</th>");
                     print("</tr>");
-
-                // something for cc-prime
                 
                 // style=\"white-space: nowrap; overflow: hidden; text-overflow:ellipsis\"
                 while ($row = $result->fetch_assoc())
