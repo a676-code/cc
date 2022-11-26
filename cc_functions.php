@@ -25,6 +25,7 @@ function colorPrimes($string)
     return $newString;
 }
 
+// verbosely display an array
 function display($array)
 {
     print("<pre>");
@@ -32,6 +33,7 @@ function display($array)
     print("</pre>");
 }
 
+// compute evaluation and all relevant data
 function getEval($x, $x0, $oddCoefficient, $oddAddend, $evenDivisor, $unboundedSequences, $data = array(), $chain = array(), $loop = array(), $call = 1, $stoppingTimeFound = False, $stoppingTime = -40, $unboundedUnproven = -6, $oddNegative = -7, $evenNegative = -8)
 {
     if (!$stoppingTimeFound && $x < $x0)
@@ -140,6 +142,7 @@ function getEval($x, $x0, $oddCoefficient, $oddAddend, $evenDivisor, $unboundedS
     return $data;
 }
 
+// used in write_unbounded_unproven
 function getFileArray($fileName)
 {
     $i = 0;
@@ -209,6 +212,7 @@ function getFileArray($fileName)
 }
 
 // FIX: inconsistent loop output for sequences that go to infinity (?)
+// compute only the loop of an evaluation
 function getLoop($x, $oddCoefficient, $oddAddend, $evenDivisor, $chain = array(), $loop = array(), $call = 1)
 {
     if ($x > 0)
@@ -256,43 +260,7 @@ function getLoop($x, $oddCoefficient, $oddAddend, $evenDivisor, $chain = array()
     return $loop;
 }
 
-function getLoops($max)
-{
-    for ($x = 1; $x < $max; $x++)
-    {
-        $loop = getLoop($x, $oddCoefficient, $oddAddend, $evenDivisor);
-        if (array_search($loop, $loops) === False)
-            $loops[] = $loop;
-    }
-    return $loops;
-}
-
-function getNumDrops($x, $oddCoefficient, $oddAddend, $evenDivisor)
-{
-    $numDrops = 0;
-    $chain = getChain($x, $oddCoefficient, $oddAddend, $evenDivisor);
-    for ($i = 0; $i < sizeof($chain); $i++)
-    {
-        if ($chain[$i] % 2 == 0)
-            $numDrops++;
-    }
-    return $numDrops;
-}
-
-function getNumInLayer($n) { return sizeof(getLayer(n)); }
-
-function getNumJumps($x, $oddCoefficient, $oddAddend, $evenDivisor)
-{
-    $numJumps = 0;
-    $chain = getChain($x, $oddCoefficient, $oddAddend, $evenDivisor);
-    for ($i = 0; $i < sizeof($chain); $i++)
-    {
-        if ($chain[$i] % 2 == 1)
-            $numJumps++;
-    }
-    return $numJumps;
-}
-
+// converts array of integers to an array with 1's in place of primes and 0's in place of composites
 function getPrimeArray($array)
 {
     for ($i = 0; $i < sizeof($array); $i++)
@@ -308,6 +276,7 @@ function getPrimeArray($array)
     return $array;
 }
 
+// compute only the total stopping time of an evaluation
 function getTotalStoppingTime($x, $oddCoefficient, $oddAddend, $evenDivisor, $chain = array(), $call = 1)
 {
     $chain[] = $x;
@@ -353,6 +322,7 @@ function getTotalStoppingTime($x, $oddCoefficient, $oddAddend, $evenDivisor, $ch
     return -10; // shouldn't get to here
 }
 
+// checks for instability of a function
 function instability($oddCoefficient, $oddAddend, $evenDivisor)
 {
     $eval1 = getEval(1, 1, $oddCoefficient, $oddAddend, $evenDivisor);
@@ -376,6 +346,7 @@ function instability($oddCoefficient, $oddAddend, $evenDivisor)
     return -1;
 }
 
+// checks if an proven unbounded sequence
 function unbounded_proven($x, $oddCoefficient, $oddAddend, $evenDivisor)
 {
     if (
@@ -413,6 +384,7 @@ function unbounded_proven($x, $oddCoefficient, $oddAddend, $evenDivisor)
     return False;
 }
 
+// returns the number (negative color code) for a proven unbounded sequence
 function unbounded_proven_case($x, $oddCoefficient, $oddAddend, $evenDivisor)
 {
     $num = -3;
@@ -435,6 +407,7 @@ function unbounded_proven_case($x, $oddCoefficient, $oddAddend, $evenDivisor)
     return -100;
 }
 
+// case
 function unbounded_proven_1($x, $oddCoefficient, $oddAddend, $evenDivisor)
 {
     if (// ex + o = o, ox + e = ...o
@@ -445,6 +418,7 @@ function unbounded_proven_1($x, $oddCoefficient, $oddAddend, $evenDivisor)
     return True;
 }
 
+// case
 function unbounded_proven_2($x, $oddCoefficient, $oddAddend, $evenDivisor)
 {
     if (// (e, eh, 2), (eh, e, 2), h % 2 = 0
@@ -465,6 +439,7 @@ function unbounded_proven_2($x, $oddCoefficient, $oddAddend, $evenDivisor)
     return True;
 }
 
+// case
 function unbounded_proven_3($x, $oddCoefficient, $oddAddend, $evenDivisor)
 {
     // (2^k, 2^km + 2^k - \ell, 2), 2 <= \ell <= 2^k - 2
@@ -684,6 +659,7 @@ function insert_all($mysqli, $x, $oddCoefficient, $oddAddend, $evenDivisor, $unb
     }
 }
 
+// intersect two arrays, returns array
 function intersectv($v1, $v2)
 {
     $newVec = array();
@@ -706,6 +682,7 @@ function intersectv($v1, $v2)
     return $newVec;
 }
 
+// checks if an integer is a power of 2
 function powerOf2($x)
 {
     while ($x % 2 == 0) { $x = $x / 2; }
@@ -715,6 +692,7 @@ function powerOf2($x)
         return True;
 }
 
+// DEPRECIATED
 function isInChain($x, $y)
 {
     f($x);
@@ -725,6 +703,7 @@ function isInChain($x, $y)
         return False;
 }
 
+// checks if a number is in a chain
 function isInChainArray($x, $chain)
 {
     if (array_search($x, $chain) !== False)
@@ -733,6 +712,7 @@ function isInChainArray($x, $chain)
         return False;
 }
 
+// checks for overflow upon adding two integers
 function overflowAdd($x, $y)
 {
     if (gettype($x + $y) != "integer")
@@ -740,6 +720,7 @@ function overflowAdd($x, $y)
     return False;
 }
 
+// checks for overflow upon multiplying two integers
 function overflowMultiply($x, $y)
 {
     if (gettype($x * $y) != "integer")
@@ -747,6 +728,7 @@ function overflowMultiply($x, $y)
     return False;
 }
 
+// DEPRECIATED: determine if loops at a specific iteration
 function loopsAt($x)
 {
     $v = f($x);
@@ -755,6 +737,7 @@ function loopsAt($x)
     return False;
 }
 
+// DEPRECIATED: position in chain
 function posInChain($x, $y)
 {
     f($x);
@@ -767,6 +750,7 @@ function posInChain($x, $y)
 
 // Need longer strings!
 // Fatal error: Uncaught TypeError: sqrt(): Argument #1 ($num) must be of type float, string given in C:\xampp\htdocs\cc\cc_functions.php:849 Stack trace: #0 C:\xampp\htdocs\cc\cc_functions.php(849): sqrt('817448,') #1 C:\xampp\htdocs\cc\cc_functions.php(39): prime('817448,') #2 C:\xampp\htdocs\cc\search.php(381): colorPrimes('31, 168, 84, 42...') #3 {main} thrown in C:\xampp\htdocs\cc\cc_functions.php on line 849
+// determines if input is a prime number or not
 function prime($x)
 {
     if ($x == 1)
@@ -780,6 +764,7 @@ function prime($x)
     return True;
 }
 
+// print array
 function printv($v)
 {
     for ($i = 0; $i < sizeof($v); $i++)
@@ -791,6 +776,7 @@ function printv($v)
     print("\n");
 }
 
+// print 2d array
 function printv2d($v)
 {
     for ($i = 0; $i < sizeof($v); $i++)
@@ -980,7 +966,7 @@ function print_color($text, $arrayElt, $colorStyle, $align = False)
 }
 
 /**/
-// printing any text with a color based on what arrayElt happens to be
+// printing arrayElt with a color based on what arrayElt happens to be
 function print_entry_color($arrayElt, $colorStyle, $align = False)
 {
 
@@ -1636,6 +1622,43 @@ function getLayers($n)
         }
     }
     return $layers;
+}
+
+function getLoops($max)
+{
+    for ($x = 1; $x < $max; $x++)
+    {
+        $loop = getLoop($x, $oddCoefficient, $oddAddend, $evenDivisor);
+        if (array_search($loop, $loops) === False)
+            $loops[] = $loop;
+    }
+    return $loops;
+}
+
+function getNumDrops($x, $oddCoefficient, $oddAddend, $evenDivisor)
+{
+    $numDrops = 0;
+    $chain = getChain($x, $oddCoefficient, $oddAddend, $evenDivisor);
+    for ($i = 0; $i < sizeof($chain); $i++)
+    {
+        if ($chain[$i] % 2 == 0)
+            $numDrops++;
+    }
+    return $numDrops;
+}
+
+function getNumInLayer($n) { return sizeof(getLayer(n)); }
+
+function getNumJumps($x, $oddCoefficient, $oddAddend, $evenDivisor)
+{
+    $numJumps = 0;
+    $chain = getChain($x, $oddCoefficient, $oddAddend, $evenDivisor);
+    for ($i = 0; $i < sizeof($chain); $i++)
+    {
+        if ($chain[$i] % 2 == 1)
+            $numJumps++;
+    }
+    return $numJumps;
 }
 
 function intersectOffMainChannel($x, $y, $oddCoefficient, $oddAddend, $evenDivisor)
