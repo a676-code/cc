@@ -469,6 +469,9 @@
                         {
                             if ($primeSequences)
                                 print("<td>".$row['prime_chain']."</td>");
+                            else
+                                print("<td>".$row['chain']."</td>");
+
                         }
                     }
 
