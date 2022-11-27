@@ -342,12 +342,12 @@
                 }
 
                 if (!empty($loopLength))
-                    $query = $query." AND l.length = '".$loopLength."'";
+                    $query = $query." AND e.loop_length = '".$loopLength."'";
 
                 if (!empty($loopLengthMin))
-                    $query = $query." AND l.length >= ".$loopLengthMin;
+                    $query = $query." AND e.loop_length >= ".$loopLengthMin;
                 if (!empty($loopLengthMin) && !empty($loopLengthMax))
-                    $query = $query." AND l.length <= ".$loopLengthMax;
+                    $query = $query." AND e.loop_length <= ".$loopLengthMax;
 
                 if (!empty($subLoop))
                 {
