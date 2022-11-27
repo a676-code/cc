@@ -9,7 +9,7 @@
 <body>
     <?php
     $time_start = microtime(true);
-    set_time_limit(2400);
+    set_time_limit(600);
     // ini_set('memory_limit', '2048M');
     include("cc_functions.php");
     include("connection_blank.php");
