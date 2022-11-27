@@ -313,12 +313,12 @@
                     $query = $query." AND e.cl_ratio >= ".$clRatioMax;
 
                 if (!empty($chainLength))
-                    $query = $query." AND c.length = '".$chainLength."'";
+                    $query = $query." AND e.chain_length = '".$chainLength."'";
 
                 if (!empty($chainLengthMin))
-                    $query = $query." AND c.length >= ".$chainLengthMin;
+                    $query = $query." AND e.chain_length >= ".$chainLengthMin;
                 if (!empty($chainLengthMin) && !empty($chainLengthMax))
-                    $query = $query." AND c.length <= ".$chainLengthMax;
+                    $query = $query." AND e.chain_length <= ".$chainLengthMax;
                 
                 if (!empty($subChain))
                 {
