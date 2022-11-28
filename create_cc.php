@@ -96,6 +96,11 @@
     
     if (!$errorPrinted)
     {
+        if ($_POST['primeSequences'] == "yes")
+            $primeSequences = True;
+        else
+            $primeSequences = False;
+            
         if ($_POST['unboundedSequences'] == "yes")
             $unboundedSequences = True;
         else
@@ -167,7 +172,7 @@
             for ($b = 1; $b <= $bMax; $b++)
             {
                 for ($x = 1; $x <= $xMax; $x++)
-                    insert_all($mysqli, $x, $a, $b, $evenDivisor, $unboundedSequences, $unboundedUnproven, $stabilityMax);
+                    insert_all($mysqli, $x, $a, $b, $evenDivisor, $primeSequences, $unboundedSequences, $unboundedUnproven, $stabilityMax);
             }
         }
         $mysqli->close();
