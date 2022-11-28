@@ -11,6 +11,7 @@
             dump_cc();
         ?>
         <h1>Success</h1>
+        File <tt>insert_cc.sql</tt> successfully created
         </br>
         <a href="index.html"><button>Back to Main Page</button></a>
     </body>
