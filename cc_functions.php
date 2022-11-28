@@ -1243,17 +1243,6 @@ function dump_cc()
     fclose($handle);
 }
 
-function writev($v)
-{
-    for ($i = 0; $i < sizeof($v); $i++)
-    {
-        print($v[$i]);
-        if ($i < sizeof($v) - 1)
-            print(", ");
-    }
-    print("\n");
-}
-
 /* FIX: screws up the file when create_cc runs twice 
 FIX:
 Warning: Undefined variable $insertIndex in C:\xampp\htdocs\cc\cc_functions.php on line 1425
@@ -1697,5 +1686,17 @@ function separatedPairExists($x, $s)
         $i++;
     }
     return $found;
+}
+
+// print an array
+function writev($v)
+{
+    for ($i = 0; $i < sizeof($v); $i++)
+    {
+        print($v[$i]);
+        if ($i < sizeof($v) - 1)
+            print(", ");
+    }
+    print("\n");
 }
 ?>
