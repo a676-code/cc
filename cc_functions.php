@@ -1176,7 +1176,7 @@ function stabilizes($oddCoefficient, $oddAddend, $evenDivisor, $stabilityMax) : 
 // FIX: unbounded_unproven_50-50-50.php is too long!
 include("unbounded_unproven_50.php");
 
-// dumps the contents of the database into a file that allows for easy re-entering of those values in, say, DBeaver
+// dumps the contents of the database into a file insert_cc.sql that allows for easy re-entering of those values in, say, DBeaver
 function dump_cc()
 {
     $fileName = "insert_cc.sql";
