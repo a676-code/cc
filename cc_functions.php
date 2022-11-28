@@ -1200,13 +1200,13 @@ function dump_cc()
 
     $functionStmt = $mysqli->prepare("SELECT * FROM `function` f
     ORDER BY f.odd_coefficient, f.odd_addend, f.even_divisor");
-    $evalStmt->execute();
-    $result = $evalStmt->get_result();
+    $functionStmt->execute();
+    $result = $functionStmt->get_result();
     $i = 0;
     while ($row = $result->fetch_assoc())
     {
         fputs($handle, "('".$row['odd_coefficient'].", ".$row['odd_addend'].", ".$row['even_divisor'].", ".$row['stabilizes'].")");
-        if ($i < $numEvals - 1)
+        if ($i < $numFunctions - 1)
             fputs($handle, ",\n");
         else
             fputs($handle, ";\n");
