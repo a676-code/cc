@@ -1176,6 +1176,7 @@ function stabilizes($oddCoefficient, $oddAddend, $evenDivisor, $stabilityMax) : 
 // FIX: unbounded_unproven_50-50-50.php is too long!
 include("unbounded_unproven_50.php");
 
+// dumps the contents of the database into a file that allows for easy re-entering of those values in, say, DBeaver
 function dump_cc()
 {
     $fileName = "insert_cc.sql";
@@ -1205,7 +1206,7 @@ function dump_cc()
     $i = 0;
     while ($row = $result->fetch_assoc())
     {
-        fputs($handle, "('".$row['odd_coefficient'].", ".$row['odd_addend'].", ".$row['even_divisor'].", ".$row['stabilizes'].")");
+        fputs($handle, "(".$row['odd_coefficient'].", ".$row['odd_addend'].", ".$row['even_divisor'].", ".$row['stabilizes'].")");
         if ($i < $numFunctions - 1)
             fputs($handle, ",\n");
         else
@@ -1215,7 +1216,7 @@ function dump_cc()
     $functionStmt->close();
     fputs($handle, "COMMIT;\n\n");
 
-    $evalCountStmt = $mysqli->prepare("SELECT COUNT(*) AS numEvals FROM `eval` e");
+    $evalCountStmt = $mysqli->prepare("SELECT COUNT(*) AS numEvals FROM evaluation e");
     $evalCountStmt->execute();
     $result = $evalCountStmt->get_result();
     $row = $result->fetch_assoc();
@@ -1230,7 +1231,7 @@ function dump_cc()
     $i = 0;
     while ($row = $result->fetch_assoc())
     {
-        fputs($handle, "('".$row['odd_coefficient'].", ".$row['odd_addend'].", ".$row['even_divisor'].", ".$row['value'].", ".$row['chain'].", ".$row['prime_chain'].", ".$row['chain_length'].", ".$row['loop'].", ".$row['prime_loop'].", ".$row['loop_length'].", ".$row['cl_ratio'].", ".$row['stopping_time'].", ".$row['total_stopping_time'].")");
+        fputs($handle, "(".$row['odd_coefficient'].", ".$row['odd_addend'].", ".$row['even_divisor'].", ".$row['value'].", '".$row['chain']."', '".$row['prime_chain']."', ".$row['chain_length'].", '".$row['loop']."', '".$row['prime_loop']."', ".$row['loop_length'].", ".$row['cl_ratio'].", ".$row['stopping_time'].", ".$row['total_stopping_time'].")");
         if ($i < $numEvals - 1)
             fputs($handle, ",\n");
         else
