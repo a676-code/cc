@@ -473,7 +473,8 @@
                             if ($primeSequences)
                                 print("<td>".$row['prime_chain']."</td>");
                             else
-                                print("<td>".$row['chain']."</td>");
+                                print_entry_color($row['chain'], $colorStyle);
+                                // print("<td>".$row['chain']."</td>");
 
                         }
                     }
