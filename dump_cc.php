@@ -12,6 +12,6 @@
         ?>
         <h1>Success</h1>
         </br>
-        <button><a href="index.html">Back to Main Page</a></button>
+        <a href="index.html"><button>Back to Main Page</button></a>
     </body>
 </html>
