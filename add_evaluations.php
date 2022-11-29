@@ -111,22 +111,6 @@ if (!empty($xMin) && !empty($xMax))
 
 if ($inputValid)
 {
-    if (empty($aMin))
-    {
-        $aMin = $a;
-        $aMax = $a;
-    }
-    if (empty($bMin))
-    {
-        $bMin = $b;
-        $bMax = $b;
-    }
-    if (empty($xMin))
-    {
-        $xMin = $x;
-        $xMax = $x;
-    }
-
     $mysqli = new mysqli($server, $user, $pw, $db);
     if ($mysqli->connect_error)
         exit('Error connecting to database');
