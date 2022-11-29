@@ -135,8 +135,6 @@ if ($inputValid)
             for ($x = $xMin; $x <= $xMax; $x++)
             {
                 insert_all($mysqli, $x, $a, $b, $evenDivisor, $primeSequences, $unboundedSequences, $unboundedUnproven, $stabilityMax);
-                // else if ($someNotAdded == False)
-                //     $someNotAdded = True;
             }
         }
     }
