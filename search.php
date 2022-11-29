@@ -424,6 +424,14 @@
                     An evaluation of a function \(f\) of the form above is represented as \((a, b, c)(x)\)
                 </p>
                 ");
+                if ($primeSequences)
+                {
+                    print(
+                        "<p>
+                        If chains and loops are all -9, this means that prime sequences weren't computed when the database was created. 
+                        </p>"
+                    );
+                }
 
                 print("<table style=\"border:1px solid white\">");
                     print("<tr>");

@@ -38,7 +38,7 @@ if (empty($xMin))
 }
 
 $inputValid = True;
-/*
+
 if (empty($a) && empty($aMin) && empty($aMax))
 {
     if ($inputValid)
@@ -61,34 +61,65 @@ if (empty($x) && empty($xMin) && empty($xMax))
     $inputValid = False;
 }
 
-if (!empty($a) || !empty($b) || !empty($x) || !empty($aMin) || !empty($aMax) || !empty($bMin) || !empty($bMax) || !empty($xMin) || !empty($xMax))
+if ((!empty($a) && $a < 0) || (!empty($aMin) && $aMin < 0) || (!empty($aMax) && $aMax < 0))
 {
-    if ($a <= 0 || $b <= 0 || $x <= 0 || $aMin <= 0 || $aMax <= 0 || $bMin <= 0 || $bMax <= 0 || $xMin <= 0 || $xMax <= 0)
+    if ($inputValid)
+        print("<h1 style=\"color:red\">Error</h1>");
+    print("Values for \(a\) must be nonnegative</br>");
+    $inputValid = False;
+}
+
+if ((!empty($b) && $b < 0) || (!empty($bMin) && $bMin < 0) || (!empty($bMax) && $bMax < 0))
+{
+    if ($inputValid)
+        print("<h1 style=\"color:red\">Error</h1>");
+    print("Values for \(b\) must be nonnegative</br>");
+    $inputValid = False;
+}
+
+if ((!empty($x) && $x < 0) || (!empty($xMin) && $xMin < 0) || (!empty($xMax) && $xMax < 0))
+{
+    if ($inputValid)
+        print("<h1 style=\"color:red\">Error</h1>");
+    print("Values for \(x\) must be nonnegative</br>");
+    $inputValid = False;
+}
+
+if (!empty($aMin) && !empty($aMax))
+{
+    if ($aMin > $aMax)
     {
         if ($inputValid)
             print("<h1 style=\"color:red\">Error</h1>");
-        print("Values must be nonnegative</br>");
+        print("The minimum value for \(a\) must be less than or equal to maximum value for \(a\).</br>");
         $inputValid = False;
     }
 }
 
-if ((!empty($aMin) && !empty($aMax)) || (!empty($bMin) && !empty($bMax)) || (!empty($xMin) && !empty($xMax)))
+if (!empty($bMin) && !empty($bMax))
 {
-    if ($aMin > $aMax || $bMin > $bMax || $cMin > $cMax)
+    if ($bMin > $bMax)
     {
         if ($inputValid)
             print("<h1 style=\"color:red\">Error</h1>");
-        print("Minimum values must be less than or equal to maximum values</br>");
+        print("The minimum value for \(b\) must be less than or equal to maximum value for \(b\).</br>");
         $inputValid = False;
     }
 }
-/**/
+
+if (!empty($xMin) && !empty($xMax))
+{
+    if ($xMin > $xMax)
+    {
+        if ($inputValid)
+            print("<h1 style=\"color:red\">Error</h1>");
+        print("The minimum value for \(x\) must be less than or equal to maximum value for \(x\).</br>");
+        $inputValid = False;
+    }
+}
 
 if ($inputValid)
 {
-    // FIX: input validation
-    // Fatal error: Uncaught TypeError: Unsupported operand types: string * string in C:\xampp\htdocs\cc\cc_functions.php:396 Stack trace: #0 C:\xampp\htdocs\cc\cc_functions.php(271): isOverflowMultiply('10', '') #1 C:\xampp\htdocs\cc\add_evaluations.php(31): goesToInfinity('', '10', '', '2') #2 {main} thrown in C:\xampp\htdocs\cc\cc_functions.php on line 396
-
     $mysqli = new mysqli($server, $user, $pw, $db);
     if ($mysqli->connect_error)
         exit('Error connecting to database');
@@ -97,39 +128,18 @@ if ($inputValid)
     $stmt = $mysqli->prepare("SET AUTOCOMMIT=0;");
     $stmt->execute();
 
-    // a, b, x
-    // a*, b, x
-    // a, b*, x
-    // a, b, x*
-    // a*, b*, x
-    // a*, b, x*
-    // a, b*, x*
-    // a*, b*, x*
-    // values and bounds --> do both
-    // if (!empty($oddAddend) && !empty($oddAddend) && !empty($x))
-    // if (empty($oddAddend) && !empty($oddAddend) && !empty($x))
-
-    $oneAdded = False;
-    $oneNotAdded = False;
     for ($a = $aMin; $a <= $aMax; $a++)
     {
         for ($b = $bMin; $b <= $bMax; $b++)
         {
             for ($x = $xMin; $x <= $xMax; $x++)
             {
-                insert_all($mysqli, $x, $a, $b, $evenDivisor, $unboundedSequences, $unboundedUnproven, $stabilityMax);
-                // else if ($oneNotAdded == False)
-                //     $oneNotAdded = True;
+                insert_all($mysqli, $x, $a, $b, $evenDivisor, $primeSequences, $unboundedSequences, $unboundedUnproven, $stabilityMax);
+                // else if ($someNotAdded == False)
+                //     $someNotAdded = True;
             }
         }
     }
-
-    if (!$oneNotAdded)
-        print("<h1>Success</h1>");
-    else if ($oneAdded && $oneNotAdded)
-        print("Note: Evaluation parameters prevented some values from being entered.</br>");
-    else // none added one not added
-        print("Error: Evaluation parameters create a sequence that goes to infinity. No evaluations were added.</br>");
 }
 else
     print("</br>");
