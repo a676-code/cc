@@ -56,7 +56,7 @@
     </p>
     <form action="create_cc.php" method="post" style="width:65%">
         <p style="width:75%">
-            The time limit is 1 hour, so estimate how many evaluations and stability checks will fit into that time-frame. Just to give an idea, the default values give an execution time of ~1.1 minutes on my machine, setting \(a_{max} = b_{max} = 50\) gives an execution time of ~4.3 minutes on my machine, and setting \(a_{max} = b_{max} = 15\) and \(x_{max} = 10\), setting the stability max to 5, and inserting unbounded sequences gives an execution time of ~58 minutes on my machine.  
+            The time limit is 1 hour, so estimate how many evaluations and stability checks will fit into that time-frame. Inserting unbounded sequences takes some time, and computing prime sequences takes a really long time. The <tt>unbounded_unproven</tt> is for writing the function that checks for unproven unbounded sequences, but such a function is already provided in <tt>unbounded_unproven_50.php</tt>. 
         </p>
         <table>
             <tr>
@@ -82,20 +82,21 @@
             </tr>
             <tr>
                 <td>
+                    Insert unbounded sequences? 
+                    <input type="radio" name="unboundedSequences" value="yes"\> Yes
+                    <input type="radio" name="unboundedSequences" value="no" checked="checked"\> No
+                    (saves time if No)
+                </td>
+            </tr>
+            <tr>
+                <td>
                     Compute prime sequences? 
                     <input type="radio" name="primeSequences" value="yes"\> Yes
                     <input type="radio" name="primeSequences" value="no" checked="checked"\> No
                     (saves lots of time if No)
                 </td>
             </tr>
-            <tr>
-                <td>
-                    Insert unbounded sequences? 
-                    <input type="radio" name="unboundedSequences" value="yes"\> Yes
-                    <input type="radio" name="unboundedSequences" value="no" checked="checked"\> No
-                    (saves lots of time if No)
-                </td>
-            </tr>
+            
             <tr>
                 <td>
                     Write <tt>unbounded_unproven</tt>? 
