@@ -39,25 +39,25 @@ if (empty($xMin))
 
 $inputValid = True;
 
-if (empty($a) && empty($aMin) && empty($aMax))
+if ((empty($a) || $a == '') && ($aMin == '' || $aMax == ''))
 {
     if ($inputValid)
         print("<h1 style=\"color:red\">Error</h1>");
-    print("Either a fixed value for \(a\) or a range must be given.</br>"); 
+    print("Either a nonnegative value for \(a\) or a range must be given.</br>"); 
     $inputValid = False;
 }
-if (empty($b) && empty($bMin) && empty($bMax))
+if ((empty($b) || $b == '') && ($bMin == '' || $bMax == ''))
 {
     if ($inputValid)
         print("<h1 style=\"color:red\">Error</h1>");
-    print("Either a fixed value for \(b\) or a range must be given.</br>");
+    print("Either a nonnegative value for \(b\) or a range must be given.</br>");
     $inputValid = False;
 }
-if (empty($x) && empty($xMin) && empty($xMax))
+if ((empty($x) || $x == '') && ($xMin == '' || $xMax == ''))
 {
     if ($inputValid)
         print("<h1 style=\"color:red\">Error</h1>");
-    print("Either a fixed value for \(x\) or a range must be given.</br>");
+    print("Either a nonnegative value for \(x\) or a range must be given.</br>");
     $inputValid = False;
 }
 
