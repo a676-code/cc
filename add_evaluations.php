@@ -21,39 +21,30 @@ $x = $_POST['x'];
 $xMin = $_POST['xMin'];
 $xMax = $_POST['xMax'];
 
-if (empty($aMin))
-{
-    $aMin = $a;
-    $aMax = $a;
-}
-if (empty($bMin))
-{
-    $bMin = $b;
-    $bMax = $b;
-}
-if (empty($xMin))
-{
-    $xMin = $x;
-    $xMax = $x;
-}
-
 $inputValid = True;
 
-if ((empty($a) || $a == '') && ($aMin == '' || $aMax == ''))
+// if both are empty or full
+if ((empty($a) || $a == '') && ($aMin == '' || $aMax == '')
+    || ((!empty($a) || $a != '') && (!empty($aMin) || $aMin != '') && (!empty($aMax) || $aMax != ''))
+)
 {
     if ($inputValid)
         print("<h1 style=\"color:red\">Error</h1>");
     print("Either a nonnegative value for \(a\) or a range must be given.</br>"); 
     $inputValid = False;
 }
-if ((empty($b) || $b == '') && ($bMin == '' || $bMax == ''))
+if ((empty($b) || $b == '') && ($bMin == '' || $bMax == '')
+    || ((!empty($b) || $b != '') && (!empty($bMin) || $bMin != '') && (!empty($bMax) || $bMax != ''))
+)
 {
     if ($inputValid)
         print("<h1 style=\"color:red\">Error</h1>");
     print("Either a nonnegative value for \(b\) or a range must be given.</br>");
     $inputValid = False;
 }
-if ((empty($x) || $x == '') && ($xMin == '' || $xMax == ''))
+if ((empty($x) || $x == '') && ($xMin == '' || $xMax == '')
+    || ((!empty($x) || $x != '') && (!empty($xMin) || $xMin != '') && (!empty($xMax) || $xMax != ''))
+)
 {
     if ($inputValid)
         print("<h1 style=\"color:red\">Error</h1>");
@@ -120,6 +111,22 @@ if (!empty($xMin) && !empty($xMax))
 
 if ($inputValid)
 {
+    if (empty($aMin))
+    {
+        $aMin = $a;
+        $aMax = $a;
+    }
+    if (empty($bMin))
+    {
+        $bMin = $b;
+        $bMax = $b;
+    }
+    if (empty($xMin))
+    {
+        $xMin = $x;
+        $xMax = $x;
+    }
+
     $mysqli = new mysqli($server, $user, $pw, $db);
     if ($mysqli->connect_error)
         exit('Error connecting to database');
