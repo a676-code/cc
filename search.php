@@ -405,8 +405,6 @@
                 mysqli_report( MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT );
                 $mysqli->set_charset("utf8mb4");
 
-                print($query."</br>");
-
                 $stmt = $mysqli->prepare($query);
                 $stmt->execute();
                 $result = $stmt->get_result();
