@@ -698,17 +698,6 @@ function powerOf2($x)
         return True;
 }
 
-// DEPRECIATED
-function isInChain($x, $y)
-{
-    f($x);
-
-    if (array_search($y, $chain) !== False)
-        return True;
-    else
-        return False;
-}
-
 // checks if a number is in a chain
 function isInChainArray($x, $chain)
 {
@@ -732,26 +721,6 @@ function overflowMultiply($x, $y)
     if (gettype($x * $y) != "integer")
         return True;
     return False;
-}
-
-// DEPRECIATED: determine if loops at a specific iteration
-function loopsAt($x)
-{
-    $v = f($x);
-    if (array_search($x, $v) !== False)
-        return True;
-    return False;
-}
-
-// DEPRECIATED: position in chain
-function posInChain($x, $y)
-{
-    f($x);
-
-    if (isInChain($x, $y))
-        return array_search($y, $chain);
-    else
-        return -1;
 }
 
 // Need longer strings!
@@ -983,6 +952,7 @@ function print_entry_color($arrayElt, $colorStyle, $align = False)
     $unproven = "blue";
     $oddNegativeColor = "lawngreen";
     $evenNegativeColor = "green";
+    $stabilityColor = "aqua";
 
     $unboundedUnproven = -6;
     if ($unboundedUnproven % 2 == 0)
@@ -1553,6 +1523,7 @@ function write_unbounded_unproven($x, $oddCoefficient, $oddAddend, $evenDivisor)
 }
 
 // Miscellaneous unused functions ////////////////////////////////////
+/*
 function consecutivePairExists($x,  $oddAddend, $oddCoefficient, $evenDivisor)
 {
     $found = False;
@@ -1672,6 +1643,37 @@ function intersectOffMainChannel($x, $y, $oddCoefficient, $oddAddend, $evenDivis
     return False;
 }
 
+// DEPRECIATED
+function isInChain($x, $y)
+{
+    f($x);
+
+    if (array_search($y, $chain) !== False)
+        return True;
+    else
+        return False;
+}
+
+// DEPRECIATED: determine if loops at a specific iteration
+function loopsAt($x)
+{
+    $v = f($x);
+    if (array_search($x, $v) !== False)
+        return True;
+    return False;
+}
+
+// DEPRECIATED: position in chain
+function posInChain($x, $y)
+{
+    f($x);
+
+    if (isInChain($x, $y))
+        return array_search($y, $chain);
+    else
+        return -1;
+}
+
 function separatedPairExists($x, $s)
 {
     $found = False;
@@ -1705,4 +1707,5 @@ function writev($v)
     }
     print("\n");
 }
+*/
 ?>
