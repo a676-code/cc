@@ -5,7 +5,7 @@
         <link rel="stylesheet" type="text/css" href="../cc.css"/>
         <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
         <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <link rel="stylesheet" type="text/css" href="cc_alt.css"/>
+    <link rel="stylesheet" type="text/css" href="cc.css"/>
     </head>
     <body style="background:black; color:white">
         <h1>Search cc</h1>
