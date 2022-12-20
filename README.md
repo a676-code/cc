@@ -3,5 +3,8 @@
 
 It is certainly not a proof of any sort. It is simply a general picture the behavior of the iterations of other "degree-1" functions. 
 
+![pic 1](pic1.png)
+![pic 2](pic2.png)
+
 # XAMPP
 XAMPP is required to run `gen-cc`. Click [here](https://www.apachefriends.org/download.html) to download and install the appropriate version for your machine. 
