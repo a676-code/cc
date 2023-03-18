@@ -3,7 +3,12 @@
 
 It is certainly not a proof of any sort. It is simply a general picture the behavior of the iterations of other "degree-1" functions. 
 
+`gen-cc` contain a dynamic search feature that allows the user to search for specific sequences. 
+
+![search](search.png)
+
 ![pic 1](pic1.png)
+
 ![pic 2](pic2.png)
 
 # XAMPP
