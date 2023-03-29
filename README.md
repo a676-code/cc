@@ -5,11 +5,11 @@ It is certainly not a proof of any sort. It is simply a general picture the beha
 
 `gen-cc` contains a dynamic search feature that allows the user to search for specific sequences. 
 
-![search](search.png)
+![search](images/search.png)
 
-![pic 1](pic1.png)
+![pic 1](images/pic1.png)
 
-![pic 2](pic2.png)
+![pic 2](images/pic2.png)
 
 # XAMPP
 XAMPP is required to run `gen-cc`. Click [here](https://www.apachefriends.org/download.html) to download and install the appropriate version for your machine. 
